@@ -1,8 +1,9 @@
 <template>
   <q-page padding>
 
-    <p>Esta é a página de customers</p>
+    <p>Esta é o começo da página de customers</p>
 
+    <div>
     <q-splitter
       v-model="splitterModel"
       style="height: 250px"
@@ -51,6 +52,9 @@
       </template>
 
     </q-splitter>
+    </div>
+    <p>Esta é o final da página de customers</p>
+
   </q-page>
 </template>
 

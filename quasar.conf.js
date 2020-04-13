@@ -60,7 +60,8 @@ module.exports = function (ctx) {
         'QTabPanel',
         'QTabs',
         'QTab',
-        'QRouteTab'
+        'QRouteTab',
+        'QSplitter'
       ],
 
       directives: [
