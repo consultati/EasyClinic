@@ -23,6 +23,7 @@
       show-if-above
       bordered
       content-class="bg-primary"
+      width="250"
     >
       <q-list dark>
         <q-item-label
