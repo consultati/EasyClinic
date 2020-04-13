@@ -1,23 +1,21 @@
 <template>
   <q-page padding>
 
-    <p>Esta é o começo da página de customers</p>
-
-    <div>
     <q-splitter
       v-model="splitterModel"
-      style="height: 250px"
+      
     >
 
       <template v-slot:before>
         <q-tabs
           v-model="tab"
           vertical
-          class="text-teal"
+          class="text-teal bg-white"
         >
-          <q-tab name="mails" icon="mail" label="Mails" />
-          <q-tab name="alarms" icon="alarm" label="Alarms" />
-          <q-tab name="movies" icon="movie" label="Movies" />
+          <q-tab name="info" icon="note_add" label="Novo Cadastro" />
+          <q-tab name="profile" icon="account_box" label="Perfil do Paciente" />
+          <q-tab name="anamnese" icon="info" label="Ficha de Anamnese" />
+          <q-tab name="history" icon="history" label="Histórico do Paciente" />
         </q-tabs>
       </template>
 
@@ -30,30 +28,36 @@
           transition-prev="jump-up"
           transition-next="jump-up"
         >
-          <q-tab-panel name="mails">
-            <div class="text-h4 q-mb-md">Mails</div>
+          <q-tab-panel name="info">
+            <div class="text-h4 q-mb-md">Informaçõs Básicas</div>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
           </q-tab-panel>
 
-          <q-tab-panel name="alarms">
-            <div class="text-h4 q-mb-md">Alarms</div>
+          <q-tab-panel name="profile">
+            <div class="text-h4 q-mb-md">Perfil do Paciente</div>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
           </q-tab-panel>
 
-          <q-tab-panel name="movies">
-            <div class="text-h4 q-mb-md">Movies</div>
+          <q-tab-panel name="anamnese">
+            <div class="text-h4 q-mb-md">Anamnese</div>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
           </q-tab-panel>
+
+          <q-tab-panel name="history">
+            <div class="text-h4 q-mb-md">Histórico do Paciente</div>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+          </q-tab-panel>
+
         </q-tab-panels>
       </template>
 
     </q-splitter>
-    </div>
-    <p>Esta é o final da página de customers</p>
 
   </q-page>
 </template>

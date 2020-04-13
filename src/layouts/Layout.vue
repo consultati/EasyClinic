@@ -60,8 +60,8 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'Clientes',
-          caption: 'Cadastro de Pacientes',
+          title: 'Fichas de Cadastro',
+          caption: 'Dados de Pacientes',
           icon: 'account_box',
           link: '/customer'
         },
