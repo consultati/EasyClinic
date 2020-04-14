@@ -41,7 +41,7 @@
                       :rules ="[val => !!val || 'Campo Obrigatório']"
                   />
                   <div class="row q-col-gutter-sm">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                        <q-select
                         type ="text"
                         label ="Sexo"
@@ -50,8 +50,8 @@
                         :options="sex"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
-                   </div>
-                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-4">
                        <q-select
                         label ="Estado Civil"
                         class  ="q-mt-md"
@@ -60,9 +60,8 @@
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
-                  </div>
-                                  
-                    <q-input
+                    <div class="col-md-4">
+                      <q-input
                         label = "Data de Nascimento"
                         v-model="customerDate"
                         class  ="q-mt-md">
@@ -77,13 +76,39 @@
                             </q-popup-proxy>
                           </q-icon>
                         </template>
-                    </q-input>
-                    <q-select
+                      </q-input>
+                    </div>
+                  </div>
+                  <div class="row q-col-gutter-sm">
+                    <div class="col-md-2">
+                      <q-select
                         label = "Logradouro"
                         class  ="q-mt-md"
-                        v-model="spotModal"
+                        v-model="customerPlace"
                         :options="options"
-                    />
+                      />
+                    </div>
+                    <div class="col-md-8">
+                      <q-input
+                        type="text"
+                        label = "Endereço"
+                        class  ="q-mt-md"
+                        v-model="customerAddress"
+                        :rules ="[val => !!val || 'Campo Obrigatório']"
+                      />
+                    </div>
+                      <div class="col-md-2">
+                      <q-input
+                        type="number"
+                        label = "Número"
+                        class  ="q-mt-md"
+                        v-model="customerNumber"
+                        :rules ="[val => !!val || 'Campo Obrigatório']"
+                      />
+                    </div>
+                    
+                  </div>                                  
+                                        
                     <q-input
                         type   ="text"
                         label ="Profissão"
@@ -149,7 +174,9 @@ export default {
       customerStatus: '',
       customerWork: '',
       customerDate: '',
-      spotModal: '',
+      customerPlace: '',
+      customerAddress: '',
+      customerNumber: '',
       fileup: '',
       options: [
         'Rua', 'Avenida', 'Rodovia', 'Estrada','Alameda'
