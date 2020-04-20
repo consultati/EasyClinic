@@ -43,10 +43,19 @@
                       :rules ="[val => !!val || 'Campo Obrigatório']"
                     />
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-2">
+                    <q-input autofocus
+                      type ="number"
+                      label ="CPF"
+                      class ="q-mt-md"
+                      v-model ="customerCPF"
+                      :rules ="[val => !!val || 'Campo Obrigatório']"
+                  />
+                  </div>
+                  <div class="col-md-4">
                     <q-input autofocus
                       type ="email"
-                      label ="E-Mail"
+                      label ="e-Mail"
                       class ="q-mt-md"
                       v-model ="customerEmail"
                       :rules ="[val => !!val || 'Campo Obrigatório', isValid('email')]"
@@ -121,6 +130,7 @@
                       />
                     </div>                    
                   </div>
+
                   <div class="row q-col-gutter-sm">
                     <div class="col-md-4">
                       <q-input
@@ -157,16 +167,54 @@
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                       />
                     </div>                     
-                  </div>                                  
-                                        
-                    <q-input
-                        type   ="text"
-                        label ="Profissão"
-                        class  ="q-mt-md"
-                        v-model ="customerWork"
-                        :rules ="[val => !!val || 'Campo Obrigatório']"
-                    />
+                  </div> 
 
+                  <div class="row q-col-gutter-sm">
+                    <div class="col-md-4">
+                      <q-input
+                        type="number"
+                        label = "Tel Residencial"
+                        class  ="q-mt-md"
+                        v-model="customerTelres"
+                      />
+                    </div>
+                    <div class="col-md-4">
+                      <q-input
+                        type="number"
+                        label = "Tel Comercial"
+                        class  ="q-mt-md"
+                        v-model="customerTelcml"
+                      />
+                    </div>
+                      <div class="col-md-4">
+                      <q-input
+                        type="number"
+                        label = "Tel Celular"
+                        class  ="q-mt-md"
+                        v-model="customerTelcel"
+                      />                   
+                    </div>                     
+                  </div>                                 
+
+                  <div class="row q-col-gutter-sm">
+                    <div class="col-md-6">                     
+                      <q-input
+                          type   ="text"
+                          label ="Profissão"
+                          class  ="q-mt-md"
+                          v-model ="customerWork"
+                          :rules ="[val => !!val || 'Campo Obrigatório']"
+                      />
+                    </div>
+                    <div class="col-md-6">                     
+                      <q-input
+                          type   ="text"
+                          label ="Recomendado por"
+                          class  ="q-mt-md"
+                          v-model ="customerRefer"
+                      />
+                    </div>
+                  </div> 
                   <q-btn
                       type    ="submit"
                       label  ="Enviar"
@@ -220,6 +268,7 @@ export default {
       splitterModel: 20,
       tab: 'info',
       customerName: '',
+      customerCPF: '',
       customerEmail: '',
       customerSex: '',
       customerStatus: '',
@@ -232,6 +281,10 @@ export default {
       customerCity: '',
       customerState: '',
       customerCEP: '',
+      customerTelres: '',
+      customerTelcml: '',
+      customerTelcel: '',
+      customerRefer: '',
       fileup: '',
       options: [
         'Rua', 'Avenida', 'Rodovia', 'Estrada','Alameda'
