@@ -8,7 +8,7 @@
                             type ="text"
                             label ="Nome Completo"
                             class ="q-mt-md"
-                            v-model ="customerName"
+                            v-model ="item.customerName"
                             :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -17,7 +17,7 @@
                             type ="number"
                             label ="CPF"
                             class ="q-mt-md"
-                            v-model ="customerCPF"
+                            v-model ="item.customerCPF"
                             :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -26,7 +26,7 @@
                             type ="email"
                             label ="e-Mail"
                             class ="q-mt-md"
-                            v-model ="customerEmail"
+                            v-model ="item.customerEmail"
                             :rules ="[val => !!val || 'Campo Obrigatório', isValid('email')]"
                         />
                     </div>                  
@@ -37,7 +37,7 @@
                         type ="text"
                         label ="Sexo"
                         class ="q-mt-md"
-                        v-model ="customerSex"
+                        v-model ="item.customerSex"
                         :options="sex"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
@@ -46,7 +46,7 @@
                         <q-select
                         label ="Estado Civil"
                         class  ="q-mt-md"
-                        v-model ="customerStatus"
+                        v-model ="item.customerStatus"
                         :options="status"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
@@ -54,13 +54,13 @@
                     <div class="col-md-4">
                         <q-input
                             label = "Data de Nascimento"
-                            v-model="customerDate"
+                            v-model="item.customerDate"
                             class  ="q-mt-md">
                                 <template v-slot:append>
                                     <q-icon name="event" class="cursor-pointer">
                                     <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
                                         <q-date
-                                        v-model="customerDate"
+                                        v-model="item.customerDate"
                                         mask = "DD-MM-YYYY"
                                         @input="() => $refs.qDateProxy.hide()"
                                         />
@@ -75,7 +75,7 @@
                         <q-select
                         label = "Logradouro"
                         class  ="q-mt-md"
-                        v-model="customerPlace"
+                        v-model="item.customerPlace"
                         :options="options"
                         />
                     </div>
@@ -84,7 +84,7 @@
                         type="text"
                         label = "Endereço"
                         class  ="q-mt-md"
-                        v-model="customerAddress"
+                        v-model="item.customerAddress"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -93,7 +93,7 @@
                         type="number"
                         label = "Número"
                         class  ="q-mt-md"
-                        v-model="customerNumber"
+                        v-model="item.customerNumber"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>                    
@@ -104,7 +104,7 @@
                         <q-input
                         label = "Bairro"
                         class  ="q-mt-md"
-                        v-model="customerDistrict"
+                        v-model="item.customerDistrict"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -113,7 +113,7 @@
                         type="text"
                         label = "Cidade"
                         class  ="q-mt-md"
-                        v-model="customerCity"
+                        v-model="item.customerCity"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -122,7 +122,7 @@
                         type="text"
                         label = "Estado"
                         class  ="q-mt-md"
-                        v-model="customerState"
+                        v-model="item.customerState"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -131,7 +131,7 @@
                         type="number"
                         label = "CEP"
                         class  ="q-mt-md"
-                        v-model="customerCEP"
+                        v-model="item.customerCEP"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>                     
@@ -143,7 +143,7 @@
                         type="number"
                         label = "Tel Residencial"
                         class  ="q-mt-md"
-                        v-model="customerTelres"
+                        v-model="item.customerTelres"
                         />
                     </div>
                     <div class="col-md-4">
@@ -151,7 +151,7 @@
                         type="number"
                         label = "Tel Comercial"
                         class  ="q-mt-md"
-                        v-model="customerTelcml"
+                        v-model="item.customerTelcml"
                         />
                     </div>
                         <div class="col-md-4">
@@ -159,7 +159,7 @@
                         type="number"
                         label = "Tel Celular"
                         class  ="q-mt-md"
-                        v-model="customerTelcel"
+                        v-model="item.customerTelcel"
                         />                   
                     </div>                     
                 </div>                                 
@@ -170,7 +170,7 @@
                             type   ="text"
                             label ="Profissão"
                             class  ="q-mt-md"
-                            v-model ="customerWork"
+                            v-model ="item.customerWork"
                             :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -179,7 +179,7 @@
                             type   ="text"
                             label ="Recomendado por"
                             class  ="q-mt-md"
-                            v-model ="customerRefer"
+                            v-model ="item.customerRefer"
                         />
                     </div>
                 </div> 
@@ -196,7 +196,7 @@
 
 <script>
 export default {
-    props : {
+    props: {
         values: {
             type: Object,
             required: true,

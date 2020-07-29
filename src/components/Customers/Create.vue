@@ -30,21 +30,21 @@
         <!-- Formulário de Informações Básicas do Paciente -->
           <q-tab-panel name="info">
             <Cadastro
-                :values="Cadastro" />            
+                :values="info" />            
           </q-tab-panel>
-
+        <!-- Formulário de Perfil do Paciente -->
           <q-tab-panel name="profile">
             <Profile />
           </q-tab-panel>
-
+        <!-- Formulário de Ficha de Anamnese -->
           <q-tab-panel name="anamnese">
             <Anamnese />
           </q-tab-panel>
-
+        <!-- Formulário de Histórico do Paciente -->
           <q-tab-panel name="history">
             <Historico />
           </q-tab-panel>
-
+        <!-- Formulário de Pesquisa de Pacients -->
           <q-tab-panel name="search">
             <div class="text-h5 tx-italic-bold q-mb-md">Pesquisar Paciente</div>
             <p>Informar dados para pesquisa</p>
@@ -62,37 +62,37 @@
     import Anamnese from './Ficha/Anamnese';
     import Historico from './Ficha/Historico';
     export default {
-
         components: {
             Cadastro,
             Profile,
             Anamnese,
             Historico
         },
-
         data () {
             return {
                 splitterModel: 20,
                 tab: 'info',
-                customerName: '',
-                customerCPF: '',
-                customerEmail: '',
-                customerSex: '',
-                customerStatus: '',
-                customerWork: '',
-                customerDate: '',
-                customerPlace: '',
-                customerAddress: '',
-                customerNumber: '',
-                customerDistrict: '',
-                customerCity: '',
-                customerState: '',
-                customerCEP: '',
-                customerTelres: '',
-                customerTelcml: '',
-                customerTelcel: '',
-                customerRefer: '',
-                fileup: ''            
+                info: {
+                  customerName: '',
+                  customerCPF: '',
+                  customerEmail: '',
+                  customerSex: '',
+                  customerStatus: '',
+                  customerWork: '',
+                  customerDate: '',
+                  customerPlace: '',
+                  customerAddress: '',
+                  customerNumber: '',
+                  customerDistrict: '',
+                  customerCity: '',
+                  customerState: '',
+                  customerCEP: '',
+                  customerTelres: '',
+                  customerTelcml: '',
+                  customerTelcel: '',
+                  customerRefer: '',
+                  fileup: '' ,
+                }                          
             }
         },
         

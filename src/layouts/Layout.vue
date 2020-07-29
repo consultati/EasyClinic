@@ -76,7 +76,7 @@ export default {
           title: 'Procedimentos',
           caption: 'Cadastro de Procedimentos',
           icon: 'assignment',
-          link: ''
+          link: '/proced'
         },
         {
           title: 'Agenda',
