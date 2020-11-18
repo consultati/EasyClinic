@@ -19,6 +19,10 @@ const routes = [
       { 
         path: '/proced', 
         component: () => import('pages/Proced.vue') 
+      },
+      { 
+        path: '/auth', 
+        component: () => import('pages/PageAuth.vue') 
       }
     ]
   }

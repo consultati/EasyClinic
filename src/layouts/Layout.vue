@@ -11,6 +11,13 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
+        <q-btn
+        to="/auth" 
+          flat
+          icon-right="account_circle" 
+          label="Login"
+          class="absolute-right" />
+
         <q-toolbar-title class="absolute-center">
           Easy Clinic
         </q-toolbar-title>
