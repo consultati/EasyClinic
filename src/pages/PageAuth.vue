@@ -35,7 +35,7 @@ import Register from 'src/components/Auth/LoginRegister.vue'
 export default {
     data () {
     return {
-      tab: 'registro'
+      tab: 'login'
     }
   },
   components: {

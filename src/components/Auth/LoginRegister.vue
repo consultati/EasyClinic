@@ -3,45 +3,47 @@
         <div class="row q-mb-md">
             <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
-                <q-icon name="account_circle" color="primary" />
+                    <q-icon name="account_circle" color="primary" />
                 </template>
-                Faça seu {{tab | titleCase}} para acessar Easy Clinic!
+                Faça seu {{ tab | titleCase }} para acessar Easy Clinic!      
             </q-banner>
         </div>
         <div class="row q-mb-md">
             <q-input 
-            outlined 
-            v-model="formData.email"
-            :rules="[ val => isValidEmailAddress(val) || 'Por favor digite um email válido']"
-            ref="email"
-            lazy-rules
-            class="col" 
-            label="Email" 
-            stack-label/>
+                outlined 
+                v-model="formData.email"
+                :rules="[ val => isValidEmailAddress(val) || 'Please enter a valid email address']"
+                ref="email"
+                lazy-rules
+                class="col" 
+                label="Email"
+                stack-label />
         </div>
         <div class="row q-mb-md">
             <q-input 
-            outlined 
-            v-model="formData.password"
-            :rules="[ val => val.length >= 6 || 'Por favor digite pelo menos 6 caracteres']"
-            ref="password"
-            lazy-rules
-            type="password"
-            class="col" 
-            label="Senha" 
-            stack-label/>
+                outlined 
+                v-model="formData.password"
+                :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters']"
+                ref="password"
+                lazy-rules
+                type="password"
+                class="col" 
+                label="Password"
+                stack-label />
         </div>
         <div class="row">
             <q-space />
             <q-btn 
-            color="primary" 
-            :label="tab"
-            type="submit" />
-        </div>
-    </form>
+                color="primary" 
+                :label="tab"
+                type="submit" />
+        </div>                
+    </form>  
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     props: ['tab'],
     data() {
@@ -53,8 +55,9 @@ export default {
         }
     },
     methods: {
+        ...mapActions ('auth', ['registerUser', 'loginUser']),
         isValidEmailAddress(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             return re.test(String(email).toLowerCase())
         },
         submitForm() {
@@ -62,12 +65,14 @@ export default {
             this.$refs.password.validate()
             if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
                 if (this.tab == 'login') {
-                    console.log('login the user')
+                    this.loginUser(this.formData)                   
                 }
                 else {
-                    console.log('register the user')
-                }  
+                    this.registerUser(this.formData)
+                    
+                }               
             }
+
         }
     },
     filters: {
@@ -75,7 +80,6 @@ export default {
             return value.charAt(0).toUpperCase() + value.slice(1)
         }
     }
-
 }
 </script>
 

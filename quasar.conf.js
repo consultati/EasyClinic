@@ -41,7 +41,7 @@ module.exports = function (ctx) {
       //            (fastest compile time; minimum bundle size; most tedious)
       // * true   - Import everything from Quasar
       //            (not treeshaking Quasar; biggest bundle size; convenient)
-      all: 'false',
+      all: 'auto',
 
       components: [
         'QLayout',
@@ -75,7 +75,8 @@ module.exports = function (ctx) {
         'QFile',
         'QSeparator',
         'QBanner',
-        'QSpace'
+        'QSpace',
+        'QDialog'
       ],
 
       directives: [
@@ -84,7 +85,11 @@ module.exports = function (ctx) {
       ],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify',
+        'Dialog',
+        'LocalStorage'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
