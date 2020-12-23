@@ -1,7 +1,9 @@
 <template>
-  <q-page padding>
-    <p>Esta é a página inicial</p>
-  </q-page>
+
+<div class="q-pa-none bg-image">
+    <q-img src="../assets/background_Malha_Azul.png" />
+</div>
+
 </template>
 
 <script>
