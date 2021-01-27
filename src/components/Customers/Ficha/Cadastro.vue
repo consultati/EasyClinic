@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="text-h5 tx-italic-bold q-mb-md">Informações Básicas</div>
-            <q-form @submit="onSubmit" class="q-mt-md">
+            <q-form @submit="salvar" class="q-mt-md">
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-6">
                         <q-input autofocus
@@ -232,6 +232,9 @@ export default {
                 return 'Senha Inválida';
                 return true;
             }
+        },
+        salvar() {
+            console.log('Seus dados foram salvos');
         }
     }
     

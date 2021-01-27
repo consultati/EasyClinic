@@ -46,8 +46,7 @@
           </q-tab-panel>
         <!-- Formulário de Pesquisa de Pacients -->
           <q-tab-panel name="search">
-            <div class="text-h5 tx-italic-bold q-mb-md">Pesquisar Paciente</div>
-            <p>Informar dados para pesquisa</p>
+            <Busca />
           </q-tab-panel>
 
         </q-tab-panels>
@@ -61,12 +60,14 @@
     import Profile from './Ficha/Profile';
     import Anamnese from './Ficha/Anamnese';
     import Historico from './Ficha/Historico';
+    import Busca from './Ficha/Busca';
     export default {
         components: {
             Cadastro,
             Profile,
             Anamnese,
-            Historico
+            Historico,
+            Busca
         },
         data () {
             return {
