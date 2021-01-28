@@ -37,7 +37,7 @@
                         type ="text"
                         label ="Sexo"
                         class ="q-mt-md"
-                        v-model ="item.customerSex"
+                        v-model ="item.customerGender"
                         :options="sex"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
@@ -46,7 +46,7 @@
                         <q-select
                         label ="Estado Civil"
                         class  ="q-mt-md"
-                        v-model ="item.customerStatus"
+                        v-model ="item.customerCivil"
                         :options="status"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
@@ -195,7 +195,9 @@
 </template>
 
 <script>
+import { db } from "boot/firebase"
 export default {
+                       
     props: {
         values: {
             type: Object,
@@ -211,6 +213,7 @@ export default {
 
     data () {
         return {
+            id: null,
             options: [
                 'Rua', 'Avenida', 'Rodovia', 'Estrada','Alameda'
             ],
@@ -233,8 +236,39 @@ export default {
                 return true;
             }
         },
-        salvar() {
-            console.log('Seus dados foram salvos');
+        async salvar() {
+
+            try {
+                const resDB = await db.collection('clientes').add({
+                    cliName: this.item.customerName,
+                    cliCPF: this.item.customerCPF,
+                    cliEmail: this.item.customerEmail,
+                    cliGender: this.item.customerGender,
+                    cliCivil: this.item.customerCivil,
+                    cliDtBirth: this.item.customerDate,
+                    cliAddressPlace: this.item.customerPlace,
+                    cliAddressName: this.item.customerAddress,
+                    cliAddressNumber: this.item.customerNumber,
+                    cliAddressDistrict: this.item.customerDistrict,
+                    cliAddressCity: this.item.customerCity,
+                    cliAddressUF: this.item.customerState,
+                    cliAddressCEP: this.item.customerCEP,
+                    cliAddressResPhone: this.item.customerTelres,
+                    cliAddressComPhone: this.item.customerTelcml,
+                    cliAddressCelPhone: this.item.customerTelcel,
+                    cliProfession: this.item.customerWork,
+                    cliReference: this.item.customerRefer,
+                    cliStatus: true
+                })
+                this.$q.notify({
+                    message: 'Dados Salvos!',
+                    color: 'green-4',
+                    textColor: 'white',
+                    icon: 'cloud_done'
+                })
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
     
