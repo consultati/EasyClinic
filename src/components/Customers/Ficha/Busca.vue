@@ -3,8 +3,7 @@
       <div class="text-h5 tx-italic-bold q-mb-md">Busca de Informações do Paciente</div>
         <q-input
           v-model="searchField"
-          @keyup.esc="searchField = ''"
-          v-select-all
+          @keyup.esc="searchField = ''"          
           outlined=""
           class="col"        
           label="Nome do Paciente">        
@@ -13,12 +12,26 @@
             <q-icon name="search" />            
           </template>        
         </q-input>
+
         <div class="separator"></div>
-        <q-card class="row" flat bordered v-for="(item, index) in pacientes" :key="index">
-          <q-card-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''" />
-          <q-btn flat color="primary" @click="editar(index, item.id)">Editar</q-btn>
-          <q-btn v-model="statusMsg" flat color="red" @click="eliminar(index, item.id)">{{ statusMsg }}</q-btn>
-        </q-card>  
+        <q-list separator bordered>
+          <q-item class="row" flat bordered v-for="(item, index) in pacientes" :key="index">
+            <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''" />                     
+            <q-btn 
+              flat 
+              round
+              dense 
+              color="primary" 
+              icon="edit"
+              @click="editar(index, item.id)" />
+            <q-btn 
+              v-model="statusDef" 
+              flat 
+              color="red" 
+              @click="statusDef">{{ item.status }}</q-btn>
+          </q-item>  
+        </q-list>
+
     </div>    
 </template>
 
@@ -34,19 +47,15 @@ export default {
       denseOpts: false,
       id: null,
       index: null,
-      statusMsg: 'Status'
+      statusMsg: 'Status',
+      searchField: ''
     }
   },
-    created() {
-    this.listarClientes();
+  created() {
+  this.listarClientes();
   },
-
   methods: {
-    searchField() {
-
-    },
-
-    async listarClientes(){
+      async listarClientes(){
       try {
 
         const resDB = await db.collection('clientes').get()
@@ -67,21 +76,21 @@ export default {
         console.log(error);
       }
     },
+
     editar(index, id){
       console.log('EDITAR');
     },
+
     eliminar(index, id){
       console.log('ELIMINAR');
     },
-    statusDef(index, id){
-      if(!this.item.status) {
-        statusMsg: 'Ativo'
-      }
-      else {
-        statusMsg: 'Inativo'
-      }
-    },
-  }
+
+    statusDef(){     
+      this.statusMsg = 'True'      
+    },  
+
+  },
+  
 }
 </script>
 
