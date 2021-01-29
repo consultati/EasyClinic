@@ -1,27 +1,24 @@
 <template>
     <div >
       <div class="text-h5 tx-italic-bold q-mb-md">Busca de Informações do Paciente</div>
-         <q-input bottom-slots v-model="text" label="Nome do Paciente" counter maxlength="25" :dense="dense">
-        <template v-slot:before>
-          <q-icon name="account_box" />
-        </template>
-
-        <template v-slot:append>
-          <q-icon v-if="text !== ''" name="close" @click="text = ''" class="cursor-pointer" />
-          <q-icon name="search" />
-        </template>
-
-        <template v-slot:hint>
-          <!-- Digite o nome do Paciente -->
-        </template>
-      </q-input>
-
-      <q-card class="row" flat bordered v-for="(item, index) in pacientes" :key="index">
-        <q-card-section class="col" v-html="item.nome" />
-        <q-btn flat color="primary" @click="editar(index, item.id)">Editar</q-btn>
-        <q-btn flat color="red" @click="eliminar(index, item.id)">Eliminar</q-btn>
-      </q-card>  
-
+        <q-input
+          v-model="searchField"
+          @keyup.esc="searchField = ''"
+          v-select-all
+          outlined=""
+          class="col"        
+          label="Nome do Paciente">        
+          <template v-slot:append>
+            <q-icon v-if="searchField !== ''" name="close" @click="searchField = ''" class="cursor-pointer" />
+            <q-icon name="search" />            
+          </template>        
+        </q-input>
+        <div class="separator"></div>
+        <q-card class="row" flat bordered v-for="(item, index) in pacientes" :key="index">
+          <q-card-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''" />
+          <q-btn flat color="primary" @click="editar(index, item.id)">Editar</q-btn>
+          <q-btn v-model="statusMsg" flat color="red" @click="eliminar(index, item.id)">{{ statusMsg }}</q-btn>
+        </q-card>  
     </div>    
 </template>
 
@@ -36,29 +33,34 @@ export default {
       dense: false,
       denseOpts: false,
       id: null,
-      index: null
+      index: null,
+      statusMsg: 'Status'
     }
   },
-
-  created() {
+    created() {
     this.listarClientes();
   },
 
   methods: {
+    searchField() {
+
+    },
+
     async listarClientes(){
       try {
 
         const resDB = await db.collection('clientes').get()
 
         resDB.forEach(element => {
-          console.log(element.id);
+          // console.log(element.id);
           const cliente = {
             id: element.id,
             nome: element.data().cliName, 
-            cpf: element.data().cliCPF        
+            cpf: element.data().cliCPF,
+            status: element.data().cliStatus        
           }
           this.pacientes.push(cliente);
-          console.log(this.pacientes);
+          // console.log(this.pacientes);
         });
 
       } catch (error) {
@@ -70,11 +72,28 @@ export default {
     },
     eliminar(index, id){
       console.log('ELIMINAR');
-    }
+    },
+    statusDef(index, id){
+      if(!this.item.status) {
+        statusMsg: 'Ativo'
+      }
+      else {
+        statusMsg: 'Inativo'
+      }
+    },
   }
 }
 </script>
 
-<style lang="scss">
+<style>
+  .tachar {
+    text-decoration: line-through;
+    text-decoration-color: red;
+  }
+  .separator {
+  background: rgb(255, 255, 255);
+  padding: 5px;
+  list-style: none;
+}
 
 </style>

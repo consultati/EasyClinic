@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="text-h5 tx-italic-bold q-mb-md">Informações Básicas</div>
+        <div class="text-h5 tx-italic-bold q-mb-md">Cadastro de Clientes</div>
             <q-form @submit="salvar" class="q-mt-md">
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-6">
@@ -13,7 +13,7 @@
                         />
                     </div>
                     <div class="col-md-2">
-                        <q-input autofocus
+                        <q-input 
                             type ="number"
                             label ="CPF"
                             class ="q-mt-md"
@@ -22,7 +22,7 @@
                         />
                     </div>
                     <div class="col-md-4">
-                        <q-input autofocus
+                        <q-input 
                             type ="email"
                             label ="e-Mail"
                             class ="q-mt-md"
@@ -260,6 +260,27 @@ export default {
                     cliReference: this.item.customerRefer,
                     cliStatus: true
                 })
+                // Limpar Dados
+                this.item.customerName = ''
+                this.item.customerCPF = 0
+                this.item.customerEmail = ''
+                this.item.customerGender = " "
+                this.item.customerCivil = " "
+                this.item.customerDate = " "
+                this.item.customerPlace = " "
+                this.item.customerAddress = " "
+                this.item.customerNumber = 0
+                this.item.customerDistrict = " "
+                this.item.customerCity = " "
+                this.item.customerState = " "
+                this.item.customerCEP = 0
+                this.item.customerTelres = " "
+                this.item.customerTelcml = " "
+                this.item.customerTelcel = " "
+                this.item.customerWork = " "
+                this.item.customerRefer = " "
+
+                // Popup Mensagem de Dados Salvos
                 this.$q.notify({
                     message: 'Dados Salvos!',
                     color: 'green-4',
