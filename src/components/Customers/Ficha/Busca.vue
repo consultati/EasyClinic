@@ -16,7 +16,15 @@
         <div class="separator"></div>
         <q-list separator bordered>
           <q-item class="row" flat bordered v-for="(item, index) in pacientes" :key="index">
-            <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''" />                     
+            <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''" 
+            />  
+            
+            <q-btn               
+              flat 
+              color="info" 
+              @click="eliminar(index, item.id)" 
+              >{{( item.status ? "Ativo" : "Inativo") }}</q-btn>
+
             <q-btn 
               flat 
               round
@@ -24,11 +32,7 @@
               color="primary" 
               icon="edit"
               @click="editar(index, item.id)" />
-            <q-btn 
-              v-model="statusDef" 
-              flat 
-              color="red" 
-              @click="statusDef">{{ item.status }}</q-btn>
+
           </q-item>  
         </q-list>
 
@@ -47,13 +51,15 @@ export default {
       denseOpts: false,
       id: null,
       index: null,
-      statusMsg: 'Status',
-      searchField: ''
+      
+      searchField: '',
+      
     }
   },
   created() {
   this.listarClientes();
   },
+
   methods: {
       async listarClientes(){
       try {
@@ -83,14 +89,12 @@ export default {
 
     eliminar(index, id){
       console.log('ELIMINAR');
-    },
-
-    statusDef(){     
-      this.statusMsg = 'True'      
-    },  
-
+    },    
   },
-  
+    
+  computed: {
+
+  }  
 }
 </script>
 
