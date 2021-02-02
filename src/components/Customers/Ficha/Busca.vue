@@ -15,7 +15,7 @@
 
         <div class="separator"></div>
         <q-list separator bordered>
-          <q-item class="row" flat bordered v-for="(item, key) in pacientes" :key="key">
+          <q-item class="row" flat bordered v-for="item in pacientes" :key="item.id">
             <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''" 
             />  
             
@@ -41,7 +41,7 @@
 
 <script>
 import { db } from "boot/firebase";
-import { mapActions, mapMutations, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -64,8 +64,8 @@ export default {
 
   methods: {
       ...mapActions('customers', ['fbReadData']),
-      ...mapMutations('customers',['addTask']),
-      ...mapState('customers', ['pacientes']),
+      //...mapMutations('customers',['addTask']),
+      //...mapState('customers', ['pacientes']),
 
     //   async listarClientes(){
     //   try {
@@ -99,8 +99,8 @@ export default {
     },    
   },
     
-  computed: {
-
+  computed: {    
+      ...mapGetters('customers', ['pacientes'])    
   }  
 }
 </script>

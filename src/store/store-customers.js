@@ -11,8 +11,7 @@ const state = {
 // mutations is used to methods not async
 const mutations = {
   addTask(state, payload) {
-    Vue.set(state.pacientes, payload.id, payload.nome, payload.status)
-  
+    Vue.set(state.pacientes, payload.id, payload.nome, payload.status)  
   }
 
 }
@@ -56,7 +55,9 @@ const actions = {
 
 // getters is used to retrieve Data
 const getters = {
-
+  pacientes: (state) => {
+    return state.pacientes
+  }
 }
 
 export default {
