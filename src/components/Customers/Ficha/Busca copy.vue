@@ -15,7 +15,7 @@
 
         <div class="separator"></div>
         <q-list separator bordered>
-          <q-item class="row" flat bordered v-for="(item, key) in pacientes" :key="key">
+          <q-item class="row" flat bordered v-for="(item, index) in pacientes" :key="index">
             <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''" 
             />  
             
@@ -41,54 +41,47 @@
 
 <script>
 import { db } from "boot/firebase";
-import { mapActions, mapMutations, mapState } from 'vuex'
 export default {
   data () {
     return {
       model: null,
       text: '',
-      //pacientes: {},
+      pacientes: [],
       dense: false,
       denseOpts: false,
       id: null,
-      index: null,      
+      index: null,
+      
       searchField: '',
       
     }
   },
   created() {
-  //this.listarClientes(); 
-  this.fbReadData();
-  
+  this.listarClientes();
   },
 
   methods: {
-      ...mapActions('customers', ['fbReadData']),
-      ...mapMutations('customers',['addTask']),
-      ...mapState('customers', ['pacientes']),
+      async listarClientes(){
+      try {
 
-    //   async listarClientes(){
-    //   try {
+        const resDB = await db.collection('clientes').get()
 
-    //     const resDB = await db.collection('clientes').get()
+        resDB.forEach(element => {
+          // console.log(element.id);
+          const cliente = {
+            id: element.id,
+            nome: element.data().cliName, 
+            cpf: element.data().cliCPF,
+            status: element.data().cliStatus        
+          }
+          this.pacientes.push(cliente);
+          // console.log(this.pacientes);
+        });
 
-    //     resDB.forEach(element => {
-    //       // console.log(element.id);
-    //       const cliente = {
-    //         id: element.id,
-    //         nome: element.data().cliName, 
-    //         cpf: element.data().cliCPF,
-    //         status: element.data().cliStatus        
-    //       }
-    //       this.pacientes.push(cliente);
-          
-    //       // console.log(this.pacientes);
-    //     });
-
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     editar(index, id){
       console.log('EDITAR');
