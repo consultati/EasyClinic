@@ -14,10 +14,25 @@
         </q-input>
 
         <div class="separator"></div>
-        <q-list separator bordered>
-          <q-item class="row" flat bordered v-for="item in pacientes" :key="item.id">
-            <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''" 
-            />  
+
+        <q-list 
+          separator 
+          bordered>
+
+          <!-- <paciente>
+            v-for="(item, key) in pacientes" 
+            :key="key"
+            :item="item"
+            :id="key">
+          </paciente> -->
+
+          <q-item 
+            class="row" 
+            flat bordered 
+            v-for="(item, key) in pacientes" 
+            :key=key>
+
+            <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''"/>  
             
             <q-btn               
               flat 
@@ -34,14 +49,16 @@
               @click="editar(index, item.id)" />
 
           </q-item>  
+
         </q-list>
 
     </div>    
 </template>
 
 <script>
-import { db } from "boot/firebase";
+//import { db } from "boot/firebase";
 import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
+//import Paciente from '../Paciente.vue';
 export default {
   data () {
     return {
@@ -57,7 +74,7 @@ export default {
     }
   },
   created() {
-  //this.listarClientes(); 
+  //this.listarClientes();
   this.fbReadData();
   
   },
@@ -101,7 +118,11 @@ export default {
     
   computed: {    
       ...mapGetters('customers', ['pacientes'])    
-  }  
+  },
+  
+  components: {
+    'paciente' : require('components/Customers/Paciente.vue').default    
+  }
 }
 </script>
 

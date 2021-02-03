@@ -3,14 +3,43 @@ import { db } from "boot/firebase";
 // state is used to Data
 const state = {
   pacientes: {
-
+    'ID1': {
+      nome: 'Eanes Azurara',
+      status: true
+    },
+    'ID2': {
+      nome: 'Priscila Azurara',
+      status: false
+    },
+    'ID3': {
+      nome: 'Pedro Azurara',
+      status: true
+    }
   }
 
+  // pacientes: [
+  //   {
+  //     id: 1,
+  //     nome: 'Eanes Azurara',
+  //     status: true
+  //   },
+  //   {
+  //     id: 2,
+  //     nome: 'Priscila Azurara',
+  //     status: false
+  //   },
+  //   {
+  //     id: 3,
+  //     nome: 'Pedro Azurara',
+  //     status: true
+  //   }
+  // ]
+  
 }
 
 // mutations is used to methods not async
 const mutations = {
-  addTask(state, payload) {
+  addPaciente(state, payload) {
     Vue.set(state.pacientes, payload.id, payload.nome, payload.status)  
   }
 
@@ -25,15 +54,16 @@ const actions = {
       const resDB = await db.collection('clientes').get()
 
       resDB.forEach(element => {
-        //console.log(element.id);
-
-        let payload = {
+        
+        let payload = {          
           id: element.id,
           nome: element.data().cliName,
-          status: element.data().cliStatus
-        }
-        //console.log('payload :', payload);
-        commit('addTask', payload)
+          status: element.data().cliStatus            
+          }
+
+        console.log('payload :', element.id, " ", payload.nome, " ", payload.status);
+
+        commit('addPaciente', payload)
 
         // const cliente = {
         //   id: element.id,
@@ -45,7 +75,7 @@ const actions = {
         
         // console.log(this.pacientes);
       });
-      console.log('object :',state.pacientes);
+      console.log('object pacientes:',state.pacientes);
     } catch (error) {
       console.log(error);
     }
