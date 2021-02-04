@@ -1,54 +1,26 @@
 import Vue from 'vue';
 import { db } from "boot/firebase";
-// state is used to Data
-const state = {
-  pacientes: {
-    'ID1': {
-      nome: 'Eanes Azurara',
-      status: true
-    },
-    'ID2': {
-      nome: 'Priscila Azurara',
-      status: false
-    },
-    'ID3': {
-      nome: 'Pedro Azurara',
-      status: true
-    }
-  }
-
-  // pacientes: [
-  //   {
-  //     id: 1,
-  //     nome: 'Eanes Azurara',
-  //     status: true
-  //   },
-  //   {
-  //     id: 2,
-  //     nome: 'Priscila Azurara',
-  //     status: false
-  //   },
-  //   {
-  //     id: 3,
-  //     nome: 'Pedro Azurara',
-  //     status: true
-  //   }
-  // ]
-  
+// state is used for Data
+const state = {  
+  pacientes: [
+    
+  ]  
 }
 
-// mutations is used to methods not async
+// mutations is used for methods not async
 const mutations = {
-  addPaciente(state, payload) {
-    Vue.set(state.pacientes, payload.id, payload.nome, payload.status)  
+  addPaciente(state, payload) {     
+    let pacientes = state.pacientes
+    pacientes.push(payload)
+    Object.assign(state, {pacientes})
   }
 
 }
 
-// actions is used to methods async
+// actions is used for methods async
 const actions = {
   async fbReadData({ commit }) {
-    console.log('start reading data from Firebase');
+    //console.log('start reading data from Firebase');
     try {
 
       const resDB = await db.collection('clientes').get()
@@ -61,21 +33,12 @@ const actions = {
           status: element.data().cliStatus            
           }
 
-        console.log('payload :', element.id, " ", payload.nome, " ", payload.status);
+        //console.log('payload :', element.id, " ", payload.nome, " ", payload.status);
 
         commit('addPaciente', payload)
-
-        // const cliente = {
-        //   id: element.id,
-        //   nome: element.data().cliName, 
-        //   cpf: element.data().cliCPF,
-        //   status: element.data().cliStatus        
-        // }
-        // this.pacientes.push(cliente);
-        
-        // console.log(this.pacientes);
+       
       });
-      console.log('object pacientes:',state.pacientes);
+      //console.log('object pacientes:',state.pacientes);
     } catch (error) {
       console.log(error);
     }
