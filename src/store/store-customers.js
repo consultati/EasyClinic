@@ -43,7 +43,13 @@ const actions = {
       console.log(error);
     }
   },
-
+  async fbAddData({ commit }, payload) {
+    try {
+      const resDB = await db.collection('clientes').add(payload)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }  
 
 // getters is used to retrieve Data

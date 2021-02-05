@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="text-h5 tx-italic-bold q-mb-md">Cadastro de Clientes</div>
-            <q-form @submit="salvar" class="q-mt-md">
+            <q-form @submit="salvar" class="q-mt-md" ref="myform">
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-6">
-                        <q-input autofocus
+                        <q-input autofocus lazy-rules
                             type ="text"
                             label ="Nome Completo"
                             class ="q-mt-md"
@@ -13,7 +13,7 @@
                         />
                     </div>
                     <div class="col-md-2">
-                        <q-input 
+                        <q-input lazy-rules
                             type ="number"
                             label ="CPF"
                             class ="q-mt-md"
@@ -22,7 +22,7 @@
                         />
                     </div>
                     <div class="col-md-4">
-                        <q-input 
+                        <q-input lazy-rules
                             type ="email"
                             label ="e-Mail"
                             class ="q-mt-md"
@@ -33,7 +33,7 @@
                 </div>                
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-4">
-                        <q-select
+                        <q-select lazy-rules
                         type ="text"
                         label ="Sexo"
                         class ="q-mt-md"
@@ -43,7 +43,7 @@
                         />
                     </div>
                     <div class="col-md-4">
-                        <q-select
+                        <q-select lazy-rules
                         label ="Estado Civil"
                         class  ="q-mt-md"
                         v-model ="item.customerCivil"
@@ -80,7 +80,7 @@
                         />
                     </div>
                     <div class="col-md-8">
-                        <q-input
+                        <q-input lazy-rules
                         type="text"
                         label = "Endereço"
                         class  ="q-mt-md"
@@ -89,7 +89,7 @@
                         />
                     </div>
                         <div class="col-md-2">
-                        <q-input
+                        <q-input lazy-rules
                         type="number"
                         label = "Número"
                         class  ="q-mt-md"
@@ -101,7 +101,7 @@
 
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-4">
-                        <q-input
+                        <q-input lazy-rules
                         label = "Bairro"
                         class  ="q-mt-md"
                         v-model="item.customerDistrict"
@@ -109,7 +109,7 @@
                         />
                     </div>
                     <div class="col-md-4">
-                        <q-input
+                        <q-input lazy-rules
                         type="text"
                         label = "Cidade"
                         class  ="q-mt-md"
@@ -118,7 +118,7 @@
                         />
                     </div>
                         <div class="col-md-2">
-                        <q-input
+                        <q-input lazy-rules
                         type="text"
                         label = "Estado"
                         class  ="q-mt-md"
@@ -127,7 +127,7 @@
                         />
                     </div>
                         <div class="col-md-2">
-                        <q-input
+                        <q-input lazy-rules
                         type="number"
                         label = "CEP"
                         class  ="q-mt-md"
@@ -166,7 +166,7 @@
 
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-6">                     
-                        <q-input
+                        <q-input lazy-rules
                             type   ="text"
                             label ="Profissão"
                             class  ="q-mt-md"
@@ -196,6 +196,7 @@
 
 <script>
 import { db } from "boot/firebase"
+import { mapActions, mapMutations, mapState, mapGetters } from 'vuex' 
 export default {
                        
     props: {
@@ -227,6 +228,8 @@ export default {
     },
 
     methods: {
+        ...mapActions('customers', ['fbAddData']),
+
         isValid(key) {
             return val => {
                 if (key == 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
@@ -236,60 +239,58 @@ export default {
                 return true;
             }
         },
-        async salvar() {
+        salvar() {
+     
+            const resDB = this.fbAddData({
+                cliName: this.item.customerName,
+                cliCPF: this.item.customerCPF,
+                cliEmail: this.item.customerEmail,
+                cliGender: this.item.customerGender,
+                cliCivil: this.item.customerCivil,
+                cliDtBirth: this.item.customerDate,
+                cliAddressPlace: this.item.customerPlace,
+                cliAddressName: this.item.customerAddress,
+                cliAddressNumber: this.item.customerNumber,
+                cliAddressDistrict: this.item.customerDistrict,
+                cliAddressCity: this.item.customerCity,
+                cliAddressUF: this.item.customerState,
+                cliAddressCEP: this.item.customerCEP,
+                cliAddressResPhone: this.item.customerTelres,
+                cliAddressComPhone: this.item.customerTelcml,
+                cliAddressCelPhone: this.item.customerTelcel,
+                cliProfession: this.item.customerWork,
+                cliReference: this.item.customerRefer,
+                cliStatus: true
+            })
+            // Limpar Dados
+            this.$refs.myform.resetValidation()
+            this.item.customerName = ''
+            this.item.customerCPF = 0
+            this.item.customerEmail = ''
+            this.item.customerGender = " "
+            this.item.customerCivil = " "
+            this.item.customerDate = " "
+            this.item.customerPlace = " "
+            this.item.customerAddress = " "
+            this.item.customerNumber = 0
+            this.item.customerDistrict = " "
+            this.item.customerCity = " "
+            this.item.customerState = " "
+            this.item.customerCEP = 0
+            this.item.customerTelres = " "
+            this.item.customerTelcml = " "
+            this.item.customerTelcel = " "
+            this.item.customerWork = " "
+            this.item.customerRefer = " "
 
-            try {
-                const resDB = await db.collection('clientes').add({
-                    cliName: this.item.customerName,
-                    cliCPF: this.item.customerCPF,
-                    cliEmail: this.item.customerEmail,
-                    cliGender: this.item.customerGender,
-                    cliCivil: this.item.customerCivil,
-                    cliDtBirth: this.item.customerDate,
-                    cliAddressPlace: this.item.customerPlace,
-                    cliAddressName: this.item.customerAddress,
-                    cliAddressNumber: this.item.customerNumber,
-                    cliAddressDistrict: this.item.customerDistrict,
-                    cliAddressCity: this.item.customerCity,
-                    cliAddressUF: this.item.customerState,
-                    cliAddressCEP: this.item.customerCEP,
-                    cliAddressResPhone: this.item.customerTelres,
-                    cliAddressComPhone: this.item.customerTelcml,
-                    cliAddressCelPhone: this.item.customerTelcel,
-                    cliProfession: this.item.customerWork,
-                    cliReference: this.item.customerRefer,
-                    cliStatus: true
-                })
-                // Limpar Dados
-                this.item.customerName = ''
-                this.item.customerCPF = 0
-                this.item.customerEmail = ''
-                this.item.customerGender = " "
-                this.item.customerCivil = " "
-                this.item.customerDate = " "
-                this.item.customerPlace = " "
-                this.item.customerAddress = " "
-                this.item.customerNumber = 0
-                this.item.customerDistrict = " "
-                this.item.customerCity = " "
-                this.item.customerState = " "
-                this.item.customerCEP = 0
-                this.item.customerTelres = " "
-                this.item.customerTelcml = " "
-                this.item.customerTelcel = " "
-                this.item.customerWork = " "
-                this.item.customerRefer = " "
-
-                // Popup Mensagem de Dados Salvos
-                this.$q.notify({
-                    message: 'Dados Salvos!',
-                    color: 'green-4',
-                    textColor: 'white',
-                    icon: 'cloud_done'
-                })
-            } catch (error) {
-                console.log(error);
-            }
+            // Popup Mensagem de Dados Salvos
+            this.$q.notify({
+                message: 'Dados Salvos!',
+                color: 'green-4',
+                textColor: 'white',
+                icon: 'cloud_done'
+            })
+             
         }
     }
     
