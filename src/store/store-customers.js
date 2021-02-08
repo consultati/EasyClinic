@@ -30,7 +30,8 @@ const actions = {
         let payload = {          
           id: element.id,
           nome: element.data().cliName,
-          status: element.data().cliStatus            
+          status: element.data().cliStatus,
+          ficha: element.data().cliFicha           
           }
 
         //console.log('payload :', element.id, " ", payload.nome, " ", payload.status);

@@ -239,7 +239,20 @@ export default {
                 return true;
             }
         },
+        
         salvar() {
+            var date = new Date();
+            var components = [
+                date.getYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds(),
+                date.getMilliseconds()
+            ];
+            var fichaID = components.join("");
+            //console.log('Ficha ID: ', fichaID); 
      
             const resDB = this.fbAddData({
                 cliName: this.item.customerName,
@@ -260,28 +273,29 @@ export default {
                 cliAddressCelPhone: this.item.customerTelcel,
                 cliProfession: this.item.customerWork,
                 cliReference: this.item.customerRefer,
-                cliStatus: true
+                cliStatus: true,
+                cliFicha: fichaID
             })
             // Limpar Dados
             this.$refs.myform.resetValidation()
             this.item.customerName = ''
-            this.item.customerCPF = 0
+            this.item.customerCPF = null
             this.item.customerEmail = ''
-            this.item.customerGender = " "
-            this.item.customerCivil = " "
-            this.item.customerDate = " "
-            this.item.customerPlace = " "
-            this.item.customerAddress = " "
-            this.item.customerNumber = 0
-            this.item.customerDistrict = " "
-            this.item.customerCity = " "
-            this.item.customerState = " "
-            this.item.customerCEP = 0
-            this.item.customerTelres = " "
-            this.item.customerTelcml = " "
-            this.item.customerTelcel = " "
-            this.item.customerWork = " "
-            this.item.customerRefer = " "
+            this.item.customerGender = ''
+            this.item.customerCivil = ''
+            this.item.customerDate = ''
+            this.item.customerPlace = ''
+            this.item.customerAddress = ''
+            this.item.customerNumber = null
+            this.item.customerDistrict = ''
+            this.item.customerCity = ''
+            this.item.customerState = ''
+            this.item.customerCEP = null
+            this.item.customerTelres = ''
+            this.item.customerTelcml = ''
+            this.item.customerTelcel = ''
+            this.item.customerWork = ''
+            this.item.customerRefer = ''
 
             // Popup Mensagem de Dados Salvos
             this.$q.notify({

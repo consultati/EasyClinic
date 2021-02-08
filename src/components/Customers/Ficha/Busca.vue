@@ -6,7 +6,7 @@
           @keyup.esc="searchField = ''"          
           outlined=""
           class="col"        
-          label="Nome do Paciente">        
+          label="Ficha e Nome do Paciente">        
           <template v-slot:append>
             <q-icon v-if="searchField !== ''" name="close" @click="searchField = ''" class="cursor-pointer" />
             <q-icon name="search" />            
@@ -32,13 +32,13 @@
             v-for="(item, key) in pacientes" 
             :key=key>
 
-            <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''"/>  
+            <q-item-section class="col" v-html="item.ficha + ' - ' + item.nome" :class="!item.status ? 'tachar' : ''"/>  
             
             <q-btn               
               flat 
               color="info" 
-              @click="eliminar(index, item.id)" 
-              >{{( item.status ? "Ativo" : "Inativo") }}</q-btn>
+              @click="eliminar(index, item.status)" 
+              >{{( item.status ? "Inativar" : "Ativar") }}</q-btn>
 
             <q-btn 
               flat 
@@ -111,8 +111,9 @@ export default {
       console.log('EDITAR');
     },
 
-    eliminar(index, id){
-      console.log('ELIMINAR');
+    eliminar(index, status){
+      status = !status
+      console.log('Status:', status);
     },    
   },
     
@@ -129,6 +130,10 @@ export default {
 <style>
   .tachar {
     text-decoration: line-through;
+    text-decoration-color: red;
+  }
+    .detachar {
+    text-decoration: none;
     text-decoration-color: red;
   }
   .separator {
