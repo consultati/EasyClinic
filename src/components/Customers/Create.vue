@@ -11,8 +11,8 @@
           class="text-teal bg-white"
         >
           <q-tab name="info" icon="note_add" label="Novo Cadastro" />
-          <q-tab name="profile" icon="account_box" label="Perfil do Paciente" />
           <q-tab name="anamnese" icon="info" label="Ficha de Anamnese" />
+          <q-tab name="profile" icon="account_box" label="Perfil do Paciente" />
           <q-tab name="history" icon="history" label="Histórico do Paciente" />
           <q-tab name="search" icon="search" label="Busca" />
         </q-tabs>

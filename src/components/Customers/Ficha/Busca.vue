@@ -6,7 +6,7 @@
           @keyup.esc="searchField = ''"          
           outlined=""
           class="col"        
-          label="Ficha e Nome do Paciente">        
+          label="Nome do Paciente">        
           <template v-slot:append>
             <q-icon v-if="searchField !== ''" name="close" @click="searchField = ''" class="cursor-pointer" />
             <q-icon name="search" />            
@@ -18,21 +18,13 @@
         <q-list 
           separator 
           bordered>
-
-          <!-- <paciente>
-            v-for="(item, key) in pacientes" 
-            :key="key"
-            :item="item"
-            :id="key">
-          </paciente> -->
-
           <q-item 
             class="row" 
             flat bordered 
             v-for="(item, key) in pacientes" 
             :key=key>
 
-            <q-item-section class="col" v-html="item.ficha + ' - ' + item.nome" :class="!item.status ? 'tachar' : ''"/>  
+            <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''"/>  
             
             <q-btn               
               flat 
