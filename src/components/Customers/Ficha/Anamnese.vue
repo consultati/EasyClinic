@@ -16,107 +16,30 @@
         <div class="separator"></div> 
 
         <!-- <div class="text-h5 tx-italic-bold q-mb-md">Detalhes do Paciente</div>  -->
+
         <q-form @submit="salvar" class="q-mt-md" ref="myform">
-            <div class="row q-pa-md-4">
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="fumante" label="Fumante" />
+            <div class="row">
+                <div class="col" v-for="(item, index) in questions" :key="index">
+                    <q-checkbox v-model="item.value" :label="item.titulo" />
                 </div>
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="lentes" label="Lentes de contato" />
-                </div> 
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="alergia" label="Alergia" />
-                </div>        
             </div>
-
-            <div class="row q-pa-md-4">
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="hepatite" label="Hepatite" />
-                </div>
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="vitiligo" label="Vitiligo" />
-                </div> 
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="queloide" label="Quelóide" />
-                </div>        
-            </div>
-
-            <div class="row q-pa-md-4">
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="diabetes" label="Diabetes" />
-                </div>
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="manchas" label="Manchas na Pele" />
-                </div> 
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="herpes" label="Herpes" />
-                </div>        
-            </div>
-
-            <div class="row q-pa-md-4">
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="cancer" label="Cancer" />
-                </div> 
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="cardiaco" label="Problemas cardíacos" />
-                </div>
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="marcapasso" label="Portador de Marcapasso" />
-                </div>       
-            </div>
-
-            <div class="row q-pa-md-4">
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="medicamento" label="Usa medicamentos" />
-                </div> 
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="esportes" label="Pratica esportes" />
-                </div>
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="sono" label="Dorme bem" />
-                </div>                       
-            </div>
-
-            <div class="row q-pa-md-4">
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="dores" label="Dores de cabeça" />
-                </div> 
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="infeccao" label="Infecções" />
-                </div>
-                <div class="col q-gutter-sm">
-                    <q-checkbox v-model="ventre" label="Prisão de Ventre" />
-                </div>                       
-            </div>
-                
-            <q-input 
-                lazy-rules
-                type   ="text"
-                label ="Descrição dos medicamentos em uso"
-                class  ="q-mt-md"
-                v-model ="medicamentos"
-            />
-            <q-input 
-                lazy-rules
-                type   ="text"
-                label ="Que tipos de produtos usa"
-                class  ="q-mt-md"
-                v-model ="produtos"
-            />
             
-            <q-btn
-                        type    ="submit"
-                        label  ="Enviar"
-                        size    ="lg"
-                        color   ="primary"
-                        class   ="full-width q-mt-md"
-                    />
+            <div class="row">
+                <q-btn
+                            type    ="submit"
+                            label  ="Enviar"
+                            size    ="lg"
+                            color   ="primary"
+                            class   ="full-width q-mt-md"
+                        />
+            </div>
 
         </q-form>
     </div>
 </template>
 
 <script>
+import { mapActions, mapMutations, mapState, mapGetters } from 'vuex' 
 export default {
     data () {
     return {
@@ -146,12 +69,16 @@ export default {
     },
 
     computed: {
+        ...mapGetters('anamnese',['questions']),
+
         item() {
             return this.values
         }
     },
 
     methods: {
+        ...mapActions('anamnese', ['getQuestions']),
+
         salvar() {
             
             //Gravar dados;      

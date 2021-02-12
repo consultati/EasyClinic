@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 import auth from './store-auth'
 import settings from './store-settings'
 import customers from './store-customers'
+import anamnese from './store-anamnese'
 
 Vue.use(Vuex)
 
@@ -23,7 +24,8 @@ export default function (/* { ssrContext } */) {
       // example
       auth,
       settings,
-      customers
+      customers,
+      anamnese
     },
 
     // enable strict mode (adds overhead!)
