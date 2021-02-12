@@ -13,14 +13,21 @@
           </template>        
         </q-input>
 
-        <div class="separator"></div> 
-
-        <!-- <div class="text-h5 tx-italic-bold q-mb-md">Detalhes do Paciente</div>  -->
+        <!-- <div class="separator"></div>  -->
 
         <q-form @submit="salvar" class="q-mt-md" ref="myform">
             <div class="row">
-                <div class="col" v-for="(item, index) in questions" :key="index">
-                    <q-checkbox v-model="item.value" :label="item.titulo" />
+                <div class="col-md-4" v-for="(item, index) in questions" :key="index">
+                    <div v-if="item.tipo == 'bool'">
+                        <q-checkbox v-model="item.value" :label="item.titulo" />
+                    </div>
+                    <div v-else-if="item.tipo == 'text'">
+                        <q-input
+                        v-model="item.value"
+                        :label="item.titulo"
+                        type="text"                        
+                        />
+                    </div>
                 </div>
             </div>
             
