@@ -48,9 +48,8 @@
 </template>
 
 <script>
-//import { db } from "boot/firebase";
 import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
-//import Paciente from '../Paciente.vue';
+
 export default {
   data () {
     return {
@@ -65,39 +64,14 @@ export default {
       
     }
   },
+  // Ler Cadastro de Clientes
   created() {
-  //this.listarClientes();
   this.fbReadData();
   
   },
 
   methods: {
       ...mapActions('customers', ['fbReadData']),
-      //...mapMutations('customers',['addTask']),
-      //...mapState('customers', ['pacientes']),
-
-    //   async listarClientes(){
-    //   try {
-
-    //     const resDB = await db.collection('clientes').get()
-
-    //     resDB.forEach(element => {
-    //       // console.log(element.id);
-    //       const cliente = {
-    //         id: element.id,
-    //         nome: element.data().cliName, 
-    //         cpf: element.data().cliCPF,
-    //         status: element.data().cliStatus        
-    //       }
-    //       this.pacientes.push(cliente);
-          
-    //       // console.log(this.pacientes);
-    //     });
-
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
 
     editar(index, id){
       console.log('EDITAR');

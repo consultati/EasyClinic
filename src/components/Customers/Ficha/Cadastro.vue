@@ -241,6 +241,8 @@ export default {
         },
         
         salvar() {
+            
+            // Define um número de ficha único
             var date = new Date();
             var components = [
                 date.getYear(),
@@ -252,8 +254,8 @@ export default {
                 date.getMilliseconds()
             ];
             var fichaID = components.join("");
-            //console.log('Ficha ID: ', fichaID); 
-     
+
+            // Define o conteúdo dos dados do cliente para salvar
             const resDB = this.fbAddData({
                 cliName: this.item.customerName,
                 cliCPF: this.item.customerCPF,
