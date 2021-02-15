@@ -44,6 +44,7 @@ const actions = {
       console.log(error);
     }
   },
+  
   async fbAddData({ commit }, payload) {
     try {
       const resDB = await db.collection('clientes').add(payload)

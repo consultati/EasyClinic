@@ -57,33 +57,18 @@ export default {
     data () {
     return {
       escolha: 'nao',
-      searchField: '',
-      fumante: false,
-      lentes: false,
-      alergia: false,
-      hepatite: false,
-      vitiligo: false,
-      queloide: false,
-      diabetes: false,
-      manchas: false,
-      herpes: false,
-      cancer: false,
-      cardiaco: false,
-      marcapasso: false,
-      medicamento: false,
-      esportes: false,
-      sono: false,
-      dores: false,
-      infeccao: false,
-      ventre: false,
-      medicamentos: '',
-      produtos: ''
+      searchField: ''
         }
+    },
+
+    // Ler Cadastro de Clientes
+    created() {
+        this.getQuestions();  
     },
 
     computed: {
         ...mapGetters('anamnese',['questions']),
-
+        
         item() {
             return this.values
         }
