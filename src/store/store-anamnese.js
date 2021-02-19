@@ -1,12 +1,8 @@
 import Vue from 'vue';
 import { db } from "boot/firebase";
 // state is used for Data
-const state = { 
-  
-    questions: [
-
-    ]
-
+const state = {   
+    questions: []
     // questions: [ 
     //   {
     //   id: 1,
@@ -28,107 +24,16 @@ const state = {
     //   }, 
     //   {
     //     id: 4,
-    //       titulo: 'Hepatite',
-    //       tipo: 'bool',
-    //       value: null
-    //     },
-    //     {
-    //       id: 5,
-    //         titulo: 'Vitiligo',
-    //         tipo: 'bool',
-    //         value: null
-    //     },
-    //     {
-    //       id: 6,
-    //         titulo: 'Quelóide',
-    //         tipo: 'bool',
-    //         value: null
-    //     },
-    //     {
-    //       id: 7,
-    //         titulo: 'Tem dores de Cabeça',
-    //         tipo: 'bool',
-    //         value: null
-    //       },
-    //       {
-    //         id: 8,
-    //           titulo: 'Tem intestino preso',
-    //           tipo: 'bool',
-    //           value: null
-    //       },
-    //       {
-    //         id: 9,
-    //           titulo: 'Tem algum tipo de infecção',
-    //           tipo: 'bool',
-    //           value: null
-    //       }, 
-    //       {
-    //         id: 10,
-    //           titulo: 'Cancer',
-    //           tipo: 'bool',
-    //           value: null
-    //         },
-    //         {
-    //           id:11,
-    //             titulo: 'Diabetes',
-    //             tipo: 'bool',
-    //             value: null
-    //         },
-    //         {
-    //           id: 12,
-    //             titulo: 'Problemas cardíacos',
-    //             tipo: 'bool',
-    //             value: null
-    //         },
-    //         {
-    //           id: 13,
-    //             titulo: 'Faz uso de medicamentos? Quais?',
-    //             tipo: 'text',
-    //             value: ''
-    //         },
-    //         {
-    //           id: 14,
-    //             titulo: 'Faz uso de touca ou boné?',
-    //             tipo: 'text',
-    //             value: ''
-    //         },
-    //         {
-    //           id: 15,
-    //             titulo: 'Quantas vezes lava a cabeça por semana?',
-    //             tipo: 'text',
-    //             value: ''
-    //         },
-    //         {
-    //           id: 16,
-    //             titulo: 'Quais os tipos de produtos que você usa?',
-    //             tipo: 'text',
-    //             value: ''
-    //         },
-    //         {
-    //           id: 17,
-    //             titulo: 'Tentou anteriormente algum tratamento? Qual?',
-    //             tipo: 'text',
-    //             value: ''
-    //         },
-    //         {
-    //           id: 18,
-    //             titulo: 'Qual área do couro cabeludo sente mais afetada?',
-    //             tipo: 'text',
-    //             value: ''
-    //         },
-    //         {
-    //           id: 19,
-    //             titulo: 'Temou remédios para emagrecer?',
-    //             tipo: 'text',
-    //             value: ''
-    //         },
-    //         {
-    //           id: 20,
-    //             titulo: 'Há quanto tempo detectou o problema de queda?',
-    //             tipo: 'text',
-    //             value: ''
-    //         }
-
+    //       titulo: 'Faz uso de medicamentos? Quais?',
+    //       tipo: 'text',
+    //       value: ''
+    //   },
+    //   {
+    //     id: 5,
+    //       titulo: 'Faz uso de touca ou boné?',
+    //       tipo: 'text',
+    //       value: ''
+    //   }
     // ]
 }
 
@@ -138,7 +43,10 @@ const mutations = {
     let questions = state.questions
     questions.push(payload)
     Object.assign(state, {questions})
-  }  
+  },
+  reset(state) {     
+    Object.assign(state, {questions:[]})
+  }
 }
 
 // actions is used for methods async
@@ -150,7 +58,11 @@ const actions = {
   //   } catch (error) {
   //     console.log(error);
   //   }
-  // }
+  // }  
+  
+  reset ({ commit }) {
+    commit('reset')
+  },   
 
   async getQuestions({ commit }) {
     try {

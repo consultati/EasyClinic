@@ -61,9 +61,13 @@ export default {
         }
     },
 
-    // Ler Cadastro de Clientes
+    // Ler Cadastro de Questões
     created() {
         this.getQuestions();  
+    },
+
+    beforeDestroy() {
+        this.reset()
     },
 
     computed: {
@@ -75,7 +79,7 @@ export default {
     },
 
     methods: {
-        ...mapActions('anamnese', ['getQuestions']),
+        ...mapActions('anamnese', ['getQuestions','reset']),
 
         salvar() {
             

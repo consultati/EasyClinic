@@ -66,12 +66,15 @@ export default {
   },
   // Ler Cadastro de Clientes
   created() {
-  this.fbReadData();
-  
+  this.fbReadData();  
   },
 
+  beforeDestroy() {
+        this.reset()
+    },
+
   methods: {
-      ...mapActions('customers', ['fbReadData']),
+      ...mapActions('customers', ['fbReadData', 'reset']),
 
     editar(index, id){
       console.log('EDITAR');

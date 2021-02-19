@@ -2,9 +2,7 @@ import Vue from 'vue';
 import { db } from "boot/firebase";
 // state is used for Data
 const state = {  
-  pacientes: [
-    
-  ]  
+  pacientes: []  
 }
 
 // mutations is used for methods not async
@@ -13,12 +11,20 @@ const mutations = {
     let pacientes = state.pacientes
     pacientes.push(payload)
     Object.assign(state, {pacientes})
+  },
+  reset(state) {     
+    Object.assign(state, {pacientes:[]})
   }
 
 }
 
 // actions is used for methods async
 const actions = {
+
+  reset ({ commit }) {
+    commit('reset')
+  },
+  
   async fbReadData({ commit }) {
     //console.log('start reading data from Firebase');
     try {
