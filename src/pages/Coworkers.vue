@@ -1,12 +1,17 @@
 <template>
   <q-page padding>
-    <p>Esta é a página de Colaboradores</p>
+    <coworkers />    
   </q-page>
 </template>
 
 <script>
+import coworkers from '../components/Coworkers/Createrh'
 export default {
-  name: 'PageIndex'
+  name: 'PageCustomer',
+
+  components: {
+    coworkers
+  }
 }
 </script>
 

@@ -6,6 +6,7 @@ import auth from './store-auth'
 import settings from './store-settings'
 import customers from './store-customers'
 import anamnese from './store-anamnese'
+import colaboradores from './store-colaboradores'
 
 Vue.use(Vuex)
 
@@ -25,7 +26,8 @@ export default function (/* { ssrContext } */) {
       auth,
       settings,
       customers,
-      anamnese
+      anamnese,
+      colaboradores
     },
 
     // enable strict mode (adds overhead!)
