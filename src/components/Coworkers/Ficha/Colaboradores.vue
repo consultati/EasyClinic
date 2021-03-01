@@ -8,7 +8,7 @@
                             type ="text"
                             label ="Nome Completo"
                             class ="q-mt-md"
-                            v-model ="item.customerName"
+                            v-model ="item.coworkerName"
                             :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -17,7 +17,7 @@
                             type ="number"
                             label ="CPF"
                             class ="q-mt-md"
-                            v-model ="item.customerCPF"
+                            v-model ="item.coworkerCPF"
                             :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -26,18 +26,39 @@
                             type ="email"
                             label ="e-Mail"
                             class ="q-mt-md"
-                            v-model ="item.customerEmail"
+                            v-model ="item.coworkerEmail"
                             :rules ="[val => !!val || 'Campo Obrigatório', isValid('email')]"
                         />
                     </div>                  
-                </div>                
+                </div> 
+                <div class="row q-col-gutter-sm">
+                    <div class="col-md-6">                     
+                        <q-select lazy-rules
+                            type   ="text"
+                            label ="Regime de Contratação"
+                            class  ="q-mt-md"
+                            v-model ="item.coworkerRegime"
+                            :options="regime"
+                            :rules ="[val => !!val || 'Campo Obrigatório']"
+                        />
+                    </div>
+                    <div class="col-md-6">                     
+                        <q-input
+                            type   ="text"
+                            label ="Carteira Profissional / Documento"
+                            class  ="q-mt-md"
+                            v-model ="item.coworkerDoc"
+                        />
+                    </div>
+                </div> 
+                          
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-4">
                         <q-select lazy-rules
                         type ="text"
                         label ="Sexo"
                         class ="q-mt-md"
-                        v-model ="item.customerGender"
+                        v-model ="item.coworkerGender"
                         :options="sex"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
@@ -46,7 +67,7 @@
                         <q-select lazy-rules
                         label ="Estado Civil"
                         class  ="q-mt-md"
-                        v-model ="item.customerCivil"
+                        v-model ="item.coworkerCivil"
                         :options="status"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
@@ -54,13 +75,13 @@
                     <div class="col-md-4">
                         <q-input
                             label = "Data de Nascimento"
-                            v-model="item.customerDate"
+                            v-model="item.coworkerDate"
                             class  ="q-mt-md">
                                 <template v-slot:append>
                                     <q-icon name="event" class="cursor-pointer">
                                     <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
                                         <q-date
-                                        v-model="item.customerDate"
+                                        v-model="item.coworkerDate"
                                         mask = "DD-MM-YYYY"
                                         @input="() => $refs.qDateProxy.hide()"
                                         />
@@ -75,7 +96,7 @@
                         <q-select
                         label = "Logradouro"
                         class  ="q-mt-md"
-                        v-model="item.customerPlace"
+                        v-model="item.coworkerPlace"
                         :options="options"
                         />
                     </div>
@@ -84,7 +105,7 @@
                         type="text"
                         label = "Endereço"
                         class  ="q-mt-md"
-                        v-model="item.customerAddress"
+                        v-model="item.coworkerAddress"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -93,7 +114,7 @@
                         type="number"
                         label = "Número"
                         class  ="q-mt-md"
-                        v-model="item.customerNumber"
+                        v-model="item.coworkerNumber"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>                    
@@ -104,7 +125,7 @@
                         <q-input lazy-rules
                         label = "Bairro"
                         class  ="q-mt-md"
-                        v-model="item.customerDistrict"
+                        v-model="item.coworkerDistrict"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -113,7 +134,7 @@
                         type="text"
                         label = "Cidade"
                         class  ="q-mt-md"
-                        v-model="item.customerCity"
+                        v-model="item.coworkerCity"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -122,7 +143,7 @@
                         type="text"
                         label = "Estado"
                         class  ="q-mt-md"
-                        v-model="item.customerState"
+                        v-model="item.coworkerState"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -131,37 +152,31 @@
                         type="number"
                         label = "CEP"
                         class  ="q-mt-md"
-                        v-model="item.customerCEP"
+                        v-model="item.coworkerCEP"
                         :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>                     
                 </div> 
 
                 <div class="row q-col-gutter-sm">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <q-input
                         type="number"
-                        label = "Tel Residencial"
+                        label = "Telefone de Contato"
                         class  ="q-mt-md"
-                        v-model="item.customerTelres"
+                        v-model="item.coworkerContact"
                         />
                     </div>
-                    <div class="col-md-4">
-                        <q-input
-                        type="number"
-                        label = "Tel Comercial"
-                        class  ="q-mt-md"
-                        v-model="item.customerTelcml"
+                    <div class="col-md-6">                     
+                        <q-select lazy-rules
+                            type   ="text"
+                            label ="Escolaridade"
+                            class  ="q-mt-md"
+                            v-model ="item.coworkerLevel"
+                            :options="escolaridade"
+                            :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
-                    </div>
-                        <div class="col-md-4">
-                        <q-input
-                        type="number"
-                        label = "Tel Celular"
-                        class  ="q-mt-md"
-                        v-model="item.customerTelcel"
-                        />                   
-                    </div>                     
+                    </div>                       
                 </div>                                 
 
                 <div class="row q-col-gutter-sm">
@@ -170,7 +185,7 @@
                             type   ="text"
                             label ="Profissão"
                             class  ="q-mt-md"
-                            v-model ="item.customerWork"
+                            v-model ="item.coworkerWork"
                             :rules ="[val => !!val || 'Campo Obrigatório']"
                         />
                     </div>
@@ -179,7 +194,7 @@
                             type   ="text"
                             label ="Especialização"
                             class  ="q-mt-md"
-                            v-model ="item.customerRefer"
+                            v-model ="item.coworkerRefer"
                         />
                     </div>
                 </div> 
@@ -223,6 +238,12 @@ export default {
             ],
             sex: [
                 'Masculino', 'Feminino'
+            ],
+            regime: [
+                'CLT', 'PJ', 'Estágio', 'Temporário'
+            ],
+            escolaridade: [
+                'Técnico', 'Graduação', 'Pós-graduação'
             ]
         }
     },
@@ -255,49 +276,51 @@ export default {
             ];
             var fichaID = components.join("");
 
-            // Define o conteúdo dos dados do cliente para salvar
+            // Define o conteúdo dos dados do colaborador para salvar
             const resDB = this.fbAddData({
-                cliName: this.item.customerName,
-                cliCPF: this.item.customerCPF,
-                cliEmail: this.item.customerEmail,
-                cliGender: this.item.customerGender,
-                cliCivil: this.item.customerCivil,
-                cliDtBirth: this.item.customerDate,
-                cliAddressPlace: this.item.customerPlace,
-                cliAddressName: this.item.customerAddress,
-                cliAddressNumber: this.item.customerNumber,
-                cliAddressDistrict: this.item.customerDistrict,
-                cliAddressCity: this.item.customerCity,
-                cliAddressUF: this.item.customerState,
-                cliAddressCEP: this.item.customerCEP,
-                cliAddressResPhone: this.item.customerTelres,
-                cliAddressComPhone: this.item.customerTelcml,
-                cliAddressCelPhone: this.item.customerTelcel,
-                cliProfession: this.item.customerWork,
-                cliReference: this.item.customerRefer,
-                cliStatus: true,
-                cliFicha: fichaID
+                cwkName: this.item.coworkerName,
+                cwkCPF: this.item.coworkerCPF,
+                cwkEmail: this.item.coworkerEmail,
+                cwkRegime: this.item.coworkerRegime,
+                cwkDocument: this.item.coworkerDoc,
+                cwkGender: this.item.coworkerGender,
+                cwkCivil: this.item.coworkerCivil,
+                cwkDtBirth: this.item.coworkerDate,
+                cwkAddressPlace: this.item.coworkerPlace,
+                cwkAddressName: this.item.coworkerAddress,
+                cwkAddressNumber: this.item.coworkerNumber,
+                cwkAddressDistrict: this.item.coworkerDistrict,
+                cwkAddressCity: this.item.coworkerCity,
+                cwkAddressUF: this.item.coworkerState,
+                cwkAddressCEP: this.item.coworkerCEP,
+                cwkAddressResPhone: this.item.coworkerContact,
+                cwkContact: this.item.coworkerLevel,               
+                cwkProfession: this.item.coworkerWork,
+                cwkReference: this.item.coworkerRefer,
+                cwkStatus: true,
+                cwkFicha: fichaID
             })
             // Limpar Dados
             this.$refs.myform.resetValidation()
-            this.item.customerName = ''
-            this.item.customerCPF = null
-            this.item.customerEmail = ''
-            this.item.customerGender = ''
-            this.item.customerCivil = ''
-            this.item.customerDate = ''
-            this.item.customerPlace = ''
-            this.item.customerAddress = ''
-            this.item.customerNumber = null
-            this.item.customerDistrict = ''
-            this.item.customerCity = ''
-            this.item.customerState = ''
-            this.item.customerCEP = null
-            this.item.customerTelres = ''
-            this.item.customerTelcml = ''
-            this.item.customerTelcel = ''
-            this.item.customerWork = ''
-            this.item.customerRefer = ''
+            this.item.coworkerName = ''
+            this.item.coworkerCPF = null
+            this.item.coworkerEmail = ''
+            this.item.coworkerRegime = ''
+            this.item.coworkerDoc = ''
+            this.item.coworkerGender = ''
+            this.item.coworkerCivil = ''
+            this.item.coworkerDate = ''
+            this.item.coworkerPlace = ''
+            this.item.coworkerAddress = ''
+            this.item.coworkerNumber = null
+            this.item.coworkerDistrict = ''
+            this.item.coworkerCity = ''
+            this.item.coworkerState = ''
+            this.item.coworkerCEP = null
+            this.item.coworkerContact = ''
+            this.item.coworkerLevel = ''
+            this.item.coworkerWork = ''
+            this.item.coworkerRefer = ''
 
             // Popup Mensagem de Dados Salvos
             this.$q.notify({
