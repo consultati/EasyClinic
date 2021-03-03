@@ -194,7 +194,7 @@
                             type   ="text"
                             label ="Especialização"
                             class  ="q-mt-md"
-                            v-model ="item.coworkerRefer"
+                            v-model ="item.coworkerEspe"
                         />
                     </div>
                 </div> 
@@ -263,19 +263,6 @@ export default {
         
         salvar() {
             
-            // Define um número de ficha único
-            var date = new Date();
-            var components = [
-                date.getYear(),
-                date.getMonth(),
-                date.getDate(),
-                date.getHours(),
-                date.getMinutes(),
-                date.getSeconds(),
-                date.getMilliseconds()
-            ];
-            var fichaID = components.join("");
-
             // Define o conteúdo dos dados do colaborador para salvar
             const resDB = this.fbAddData({
                 cwkName: this.item.coworkerName,
@@ -293,12 +280,11 @@ export default {
                 cwkAddressCity: this.item.coworkerCity,
                 cwkAddressUF: this.item.coworkerState,
                 cwkAddressCEP: this.item.coworkerCEP,
-                cwkAddressResPhone: this.item.coworkerContact,
-                cwkContact: this.item.coworkerLevel,               
+                cwkContact: this.item.coworkerContact,
+                cwkLevel: this.item.coworkerLevel,               
                 cwkProfession: this.item.coworkerWork,
-                cwkReference: this.item.coworkerRefer,
-                cwkStatus: true,
-                cwkFicha: fichaID
+                cwkEspe: this.item.coworkerEspe,
+                cwkStatus: true                
             })
             // Limpar Dados
             this.$refs.myform.resetValidation()
@@ -320,7 +306,7 @@ export default {
             this.item.coworkerContact = ''
             this.item.coworkerLevel = ''
             this.item.coworkerWork = ''
-            this.item.coworkerRefer = ''
+            this.item.coworkerEspe = ''
 
             // Popup Mensagem de Dados Salvos
             this.$q.notify({

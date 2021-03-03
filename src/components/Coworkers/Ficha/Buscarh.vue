@@ -15,13 +15,13 @@
 
         <div class="separator"></div>
 
-        <!-- <q-list 
+        <q-list 
           separator 
           bordered>
           <q-item 
             class="row" 
             flat bordered 
-            v-for="(item, key) in pacientes" 
+            v-for="(item, key) in colaboradores" 
             :key=key>
 
             <q-item-section class="col" v-html="item.nome" :class="!item.status ? 'tachar' : ''"/>  
@@ -42,23 +42,66 @@
 
           </q-item>  
 
-        </q-list> -->
+        </q-list>
 
     </div>        
 </template>
 
 <script>
+import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
+
 export default {
-    data () {
+  data () {
     return {
-   
+  
       searchField: ''
       
     }
   },
+  // Ler Cadastro de Clientes
+  created() {
+    this.fbReadData();  
+  },
+
+  beforeDestroy() {
+    this.reset()
+  },
+
+  methods: {
+    ...mapActions('colaboradores', ['fbReadData', 'reset']),
+
+    editar(index, id){
+      console.log('EDITAR');
+    },
+
+    eliminar(index, status){
+      status = !status
+      console.log('Status:', status);
+    },    
+  },
+      
+  computed: {    
+    ...mapGetters('colaboradores', ['colaboradores'])    
+  },
+    
+  components: {
+    'colaboradores' : require('components/Customers/Paciente.vue').default    
+  }
 }
 </script>
 
-<style lang="scss">
-
+<style>
+  .tachar {
+    text-decoration: line-through;
+    text-decoration-color: red;
+  }
+    .detachar {
+    text-decoration: none;
+    text-decoration-color: red;
+  }
+  .separator {
+  background: rgb(255, 255, 255);
+  padding: 5px;
+  list-style: none;
+}  
 </style>
