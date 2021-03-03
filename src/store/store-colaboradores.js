@@ -26,7 +26,7 @@ const actions = {
   },
   
   async fbReadData({ commit }) {
-    //console.log('start reading data from Firebase');
+    //Faz a leitura dos dados de colaboradores no Banco de Dados
     try {
 
       const resDB = await db.collection('coworkers').get()
@@ -37,14 +37,10 @@ const actions = {
           id: element.id,
           nome: element.data().cwkName,
           status: element.data().cwkStatus                     
-          }
-
-        //console.log('payload :', element.id, " ", payload.nome, " ", payload.status);
-
-        commit('addColaborador', payload)
-       
+        }     
+        commit('addColaborador', payload)     
       });
-      //console.log('object pacientes:',state.pacientes);
+      // Trata caso ocorra erro de leitura no Banco
     } catch (error) {
       console.log(error);
     }

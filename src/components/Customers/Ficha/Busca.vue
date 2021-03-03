@@ -29,7 +29,7 @@
             <q-btn               
               flat 
               color="info" 
-              @click="eliminar(index, item.status)" 
+              @click="eliminar(key, item.status)" 
               >{{( item.status ? "Inativar" : "Ativar") }}</q-btn>
 
             <q-btn 
@@ -38,7 +38,7 @@
               dense 
               color="primary" 
               icon="edit"
-              @click="editar(index, item.id)" />
+              @click="editar(key, item.status)" />
 
           </q-item>  
 
@@ -66,7 +66,7 @@ export default {
   },
   // Ler Cadastro de Clientes
   created() {
-  this.fbReadData();  
+    this.fbReadData();  
   },
 
   beforeDestroy() {
@@ -76,23 +76,23 @@ export default {
   methods: {
       ...mapActions('customers', ['fbReadData', 'reset']),
 
-    editar(index, id){
-      console.log('EDITAR');
+      editar(index, status){
+      console.log('EDITAR Item: ', index, 'Status: ', status);
     },
 
     eliminar(index, status){
       status = !status
-      console.log('Status:', status);
+      console.log('INATIVAR Item: ', index ,'Status: ', status);
     },    
   },
     
   computed: {    
       ...mapGetters('customers', ['pacientes'])    
-  },
-  
-  components: {
-    'paciente' : require('components/Customers/Paciente.vue').default    
   }
+  
+  // components: {
+  //   'paciente' : require('components/Customers/Paciente.vue').default    
+  // }
 }
 </script>
 
