@@ -15,7 +15,6 @@ const mutations = {
   reset(state) {     
     Object.assign(state, {pacientes:[]})
   }
-
 }
 
 // actions is used for methods async
@@ -46,6 +45,30 @@ const actions = {
        
       });
       //console.log('object pacientes:',state.pacientes);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  async fbSearchData({ commit }, name) {
+    
+    try {
+
+      const resDB = await db.collection('clientes').where("cliName", ">=", name).get()
+
+      resDB.forEach(element => {
+        
+        let payload = {          
+          id: element.id,
+          nome: element.data().cliName,
+          status: element.data().cliStatus,
+          ficha: element.data().cliFicha           
+          }        
+
+        commit('addPaciente', payload)
+       
+      });
+      
     } catch (error) {
       console.log(error);
     }

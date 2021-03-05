@@ -2,6 +2,7 @@
     <div >
       <div class="text-h5 tx-italic-bold q-mb-md">Busca de Informações do Paciente</div>
         <q-input
+          debounce="800" 
           v-model="searchField"
           @keyup.esc="searchField = ''"          
           outlined=""
@@ -54,27 +55,36 @@ export default {
   data () {
     return {
       model: null,
-      text: '',
-      //pacientes: {},
+      text: '',      
       dense: false,
       denseOpts: false,
       id: null,
       index: null,      
-      searchField: '',
-      
+      searchField: '',      
     }
   },
   // Ler Cadastro de Clientes
-  created() {
-    this.fbReadData();  
-  },
+  // created() {
+  //   this.fbReadData();  
+  // },
 
   beforeDestroy() {
         this.reset()
     },
 
+  watch: {    
+    searchField(value) {
+      this.reset()
+      console.log('Valor: ', value);
+      if( !value.length ) {
+        return
+      }
+      this.fbSearchData(value)
+    }    
+  },
+
   methods: {
-      ...mapActions('customers', ['fbReadData', 'reset']),
+      ...mapActions('customers', ['fbReadData', 'reset', 'fbSearchData']),
 
       editar(index, status){
       console.log('EDITAR Item: ', index, 'Status: ', status);
