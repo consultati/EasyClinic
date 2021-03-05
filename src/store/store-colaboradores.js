@@ -45,6 +45,29 @@ const actions = {
       console.log(error);
     }
   },
+
+  async fbSearchData({ commit }, name) {
+    
+    try {
+
+      const resDB = await db.collection('coworkers').where("cwkName", ">=", name).get()
+
+      resDB.forEach(element => {
+        
+        let payload = {          
+          id: element.id,
+          nome: element.data().cwkName,
+          status: element.data().cwkStatus                     
+          }        
+
+        commit('addColaborador', payload)
+       
+      });
+      
+    } catch (error) {
+      console.log(error);
+    }
+  },
   
   async fbAddData({ commit }, payload) {
     try {

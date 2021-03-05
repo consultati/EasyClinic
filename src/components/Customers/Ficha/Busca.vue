@@ -75,7 +75,7 @@ export default {
   watch: {    
     searchField(value) {
       this.reset()
-      console.log('Valor: ', value);
+      // console.log('Valor: ', value);
       if( !value.length ) {
         return
       }

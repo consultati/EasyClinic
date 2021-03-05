@@ -2,6 +2,7 @@
   <div >
     <div class="text-h5 tx-italic-bold q-mb-md">Busca de Informações de Colaboradores</div>
       <q-input
+        debounce="800"
         v-model="searchField"
         @keyup.esc="searchField = ''"          
         outlined=""
@@ -59,16 +60,27 @@ export default {
     }
   },
   // Ler Cadastro de Clientes
-  created() {
-    this.fbReadData();  
-  },
+  // created() {
+  //   this.fbReadData();  
+  // },
   // Reset colaboradores object antes de sair
   beforeDestroy() {
     this.reset()
   },
 
+  watch: {    
+    searchField(value) {
+      this.reset()
+      console.log('Valor: ', value);
+      if( !value.length ) {
+        return
+      }
+      this.fbSearchData(value)
+    }    
+  },
+
   methods: {
-    ...mapActions('colaboradores', ['fbReadData', 'reset']),
+    ...mapActions('colaboradores', ['fbReadData', 'fbSearchData', 'reset']),
 
     editar(index, status){
       console.log('EDITAR Item: ', index, 'Status: ', status);
