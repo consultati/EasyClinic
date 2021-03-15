@@ -10,7 +10,17 @@
           label="Nome do Paciente">        
           <template v-slot:append>
             <q-icon v-if="searchField !== ''" name="close" @click="searchField = ''" class="cursor-pointer" />
-            <q-icon name="search" />            
+            <q-icon name="search" /> 
+
+            <div q-mb-lg>
+              <q-btn   
+                @click="showAddCustomer = true"             
+                round
+                color="primary"
+                size="10px"
+                icon="add"
+              />
+            </div>
           </template>        
         </q-input>
 
@@ -45,10 +55,15 @@
 
         </q-list>
 
+        <q-dialog v-model="showAddCustomer">
+          <add-customer />          
+        </q-dialog>
+
     </div>    
 </template>
 
 <script>
+import Cadastro from 'components/Customers/Ficha/Cadastro.vue'
 import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
 
 export default {
@@ -60,22 +75,18 @@ export default {
       denseOpts: false,
       id: null,
       index: null,      
-      searchField: '',      
+      searchField: '',
+      showAddCustomer: false      
     }
   },
-  // Ler Cadastro de Clientes
-  // created() {
-  //   this.fbReadData();  
-  // },
-
+  
   beforeDestroy() {
         this.reset()
     },
 
   watch: {    
     searchField(value) {
-      this.reset()
-      // console.log('Valor: ', value);
+      this.reset()      
       if( !value.length ) {
         return
       }
@@ -93,16 +104,20 @@ export default {
     eliminar(index, status){
       status = !status
       console.log('INATIVAR Item: ', index ,'Status: ', status);
-    },    
+    },
+    
   },
     
   computed: {    
       ...mapGetters('customers', ['pacientes'])    
+  },
+
+  components: {
+    'addCustomer' : require('components/Customers/Modals/AddCustomer.vue').default,
+    'cadastro' : require('components/Customers/Ficha/Cadastro.vue').default,
+    
   }
-  
-  // components: {
-  //   'paciente' : require('components/Customers/Paciente.vue').default    
-  // }
+
 }
 </script>
 
