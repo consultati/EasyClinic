@@ -7,7 +7,7 @@
     <q-card-section class="row">
       <q-card-actions align="left">
         <q-btn 
-          @click="adicionar()"
+          @click="adicionarSim()"
           flat 
           label="Sim" 
           color="primary" 
@@ -15,7 +15,8 @@
       </q-card-actions>
       <q-space /> 
       <q-card-actions align="right">
-        <q-btn 
+        <q-btn
+          @click="adicionarNao()" 
           flat 
           label="Não" 
           color="negative" 
@@ -29,8 +30,12 @@
 <script>
 export default {
   methods: {
-    adicionar() {
+    adicionarSim() {
       this.showAddCustomer = true
+      console.log('Adicionar Cliente', this.showAddCustomer);
+    },
+    adicionarNao() {
+      this.showAddCustomer = false
       console.log('Adicionar Cliente', this.showAddCustomer);
     },
   }    
