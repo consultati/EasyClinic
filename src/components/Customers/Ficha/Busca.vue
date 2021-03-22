@@ -58,7 +58,7 @@
         <q-dialog v-model="showAddCustomer">
           <add-customer />          
         </q-dialog>
-
+  
     </div>    
 </template>
 

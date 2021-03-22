@@ -24,12 +24,12 @@
           transition-prev="jump-up"
           transition-next="jump-up"
         >
-        <!-- Formulário de Informações Básicas do Paciente -->
+        <!-- Formulário de Informações do Colaborador -->
           <q-tab-panel name="info">
             <Colaboradores
                 :values="info" />            
           </q-tab-panel>
-        <!-- Formulário de Pesquisa de Pacients -->
+        <!-- Formulário de Pesquisa de Colaboradores -->
           <q-tab-panel name="search">
             <Buscarh />
           </q-tab-panel>
@@ -52,27 +52,7 @@
             return {
                 splitterModel: 20,
                 tab: 'info',
-                info: {
-                  customerName: '',
-                  customerCPF: '',
-                  customerEmail: '',
-                  customerSex: '',
-                  customerStatus: '',
-                  customerWork: '',
-                  customerDate: '',
-                  customerPlace: '',
-                  customerAddress: '',
-                  customerNumber: '',
-                  customerDistrict: '',
-                  customerCity: '',
-                  customerState: '',
-                  customerCEP: '',
-                  customerTelres: '',
-                  customerTelcml: '',
-                  customerTelcel: '',
-                  customerRefer: '',
-                  fileup: '' ,
-                }                          
+                info: {}                          
             }
         },
         

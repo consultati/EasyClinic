@@ -22,13 +22,17 @@
           color="negative" 
           v-close-popup />
       </q-card-actions>
-    </q-card-section>
-
+    </q-card-section>    
   </q-card>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      showAddCustomer: false      
+    }
+  },
   methods: {
     adicionarSim() {
       this.showAddCustomer = true
