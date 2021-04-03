@@ -1,7 +1,6 @@
 <template>
     <q-splitter
-      v-model="splitterModel"
-      
+      v-model="splitterModel"      
     >
 
       <template v-slot:before>
@@ -31,7 +30,7 @@
           </q-tab-panel>
         <!-- Formulário de Pesquisa de Colaboradores -->
           <q-tab-panel name="search">
-            <Buscarh />
+            <Buscarh @newCoworker="tab='info'"/>
           </q-tab-panel>
 
         </q-tab-panels>

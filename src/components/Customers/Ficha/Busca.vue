@@ -1,5 +1,9 @@
 <template>
     <div >
+      <div 
+        class="row q-mb-md justify-end">
+        <q-btn color="primary" @click="$emit('newCustomer')" label="Cadastrar Novo Paciente"/>
+      </div>
       <div class="text-h5 tx-italic-bold q-mb-md">Busca de Informações do Paciente</div>
         <q-input
           debounce="800" 
@@ -10,17 +14,7 @@
           label="Nome do Paciente">        
           <template v-slot:append>
             <q-icon v-if="searchField !== ''" name="close" @click="searchField = ''" class="cursor-pointer" />
-            <q-icon name="search" /> 
-
-            <div q-mb-lg>
-              <q-btn   
-                @click="showAddCustomer = true"             
-                round
-                color="primary"
-                size="10px"
-                icon="add"
-              />
-            </div>
+            <q-icon name="search" />            
           </template>        
         </q-input>
 
@@ -80,6 +74,7 @@ export default {
     }
   },
   
+  // Reset pacientes object antes de sair
   beforeDestroy() {
         this.reset()
     },

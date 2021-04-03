@@ -1,5 +1,9 @@
 <template>
   <div >
+    <div 
+        class="row q-mb-md justify-end">
+        <q-btn color="primary" @click="$emit('newCoworker')" label="Cadastrar Novo Colaborador"/>
+      </div>
     <div class="text-h5 tx-italic-bold q-mb-md">Busca de Informações de Colaboradores</div>
       <q-input
         debounce="800"
@@ -59,10 +63,7 @@ export default {
       
     }
   },
-  // Ler Cadastro de Clientes
-  // created() {
-  //   this.fbReadData();  
-  // },
+  
   // Reset colaboradores object antes de sair
   beforeDestroy() {
     this.reset()

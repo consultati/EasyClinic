@@ -46,7 +46,7 @@
           </q-tab-panel>
         <!-- Formulário de Pesquisa de Pacients -->
           <q-tab-panel name="search">
-            <Busca />
+            <Busca @newCustomer="tab='info'"/>
           </q-tab-panel>
 
         </q-tab-panels>
@@ -73,27 +73,7 @@
             return {
                 splitterModel: 20,
                 tab: 'info',
-                info: {
-                  customerName: '',
-                  customerCPF: '',
-                  customerEmail: '',
-                  customerSex: '',
-                  customerStatus: '',
-                  customerWork: '',
-                  customerDate: '',
-                  customerPlace: '',
-                  customerAddress: '',
-                  customerNumber: '',
-                  customerDistrict: '',
-                  customerCity: '',
-                  customerState: '',
-                  customerCEP: '',
-                  customerTelres: '',
-                  customerTelcml: '',
-                  customerTelcel: '',
-                  customerRefer: '',
-                  fileup: '' ,
-                }                          
+                info: {}                          
             }
         },
         
