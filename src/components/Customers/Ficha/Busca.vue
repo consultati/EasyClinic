@@ -121,7 +121,7 @@ export default {
     text-decoration: line-through;
     text-decoration-color: red;
   }
-    .detachar {
+  .detachar {
     text-decoration: none;
     text-decoration-color: red;
   }

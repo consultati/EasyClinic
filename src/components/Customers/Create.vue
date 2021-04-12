@@ -30,7 +30,8 @@
         <!-- Formulário de Informações Básicas do Paciente -->
           <q-tab-panel name="info">
             <Cadastro
-                :values="info" />            
+                :values="info"
+                @fichaAnamnese="tab='anamnese'" />            
           </q-tab-panel>
         <!-- Formulário de Perfil do Paciente -->
           <q-tab-panel name="profile">

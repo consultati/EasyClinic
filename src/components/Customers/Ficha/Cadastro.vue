@@ -182,14 +182,29 @@
                             v-model ="item.customerRefer"
                         />
                     </div>
+                </div>
+                <div class="row q-col-gutter-sm">
+                    <div class="col-md-6">
+                        <q-btn
+                            :disable=salvarDisable
+                            :color  =salvarColor
+                            type    ="submit"
+                            label  ="Salvar"
+                            size    ="lg"
+                            class   ="full-width q-mt-md"
+                        />
+                    </div>
+                    <div class="col-md-6">
+                        <q-btn
+                            size=lg 
+                            :disable=fichaDisable
+                            :color=fichaColor 
+                            @click="$emit('fichaAnamnese')" 
+                            label="Ficha de Anamnese"
+                            class   ="full-width q-mt-md"
+                        />
+                    </div>
                 </div> 
-                <q-btn
-                    type    ="submit"
-                    label  ="Enviar"
-                    size    ="lg"
-                    color   ="primary"
-                    class   ="full-width q-mt-md"
-                />
             </q-form>
     </div>
 </template>
@@ -215,6 +230,10 @@ export default {
     data () {
         return {
             id: null,
+            fichaDisable: true,
+            fichaColor: "secondary",
+            salvarDisable: false,
+            salvarColor: "primary",
             options: [
                 'Rua', 'Avenida', 'Rodovia', 'Estrada','Alameda'
             ],
@@ -279,25 +298,25 @@ export default {
                 cliFicha: fichaID
             })
             // Limpar Dados
-            this.$refs.myform.resetValidation()
-            this.item.customerName = ''
-            this.item.customerCPF = null
-            this.item.customerEmail = ''
-            this.item.customerGender = ''
-            this.item.customerCivil = ''
-            this.item.customerDate = ''
-            this.item.customerPlace = ''
-            this.item.customerAddress = ''
-            this.item.customerNumber = null
-            this.item.customerDistrict = ''
-            this.item.customerCity = ''
-            this.item.customerState = ''
-            this.item.customerCEP = null
-            this.item.customerTelres = ''
-            this.item.customerTelcml = ''
-            this.item.customerTelcel = ''
-            this.item.customerWork = ''
-            this.item.customerRefer = ''
+            // this.$refs.myform.resetValidation()
+            // this.item.customerName = ''
+            // this.item.customerCPF = null
+            // this.item.customerEmail = ''
+            // this.item.customerGender = ''
+            // this.item.customerCivil = ''
+            // this.item.customerDate = ''
+            // this.item.customerPlace = ''
+            // this.item.customerAddress = ''
+            // this.item.customerNumber = null
+            // this.item.customerDistrict = ''
+            // this.item.customerCity = ''
+            // this.item.customerState = ''
+            // this.item.customerCEP = null
+            // this.item.customerTelres = ''
+            // this.item.customerTelcml = ''
+            // this.item.customerTelcel = ''
+            // this.item.customerWork = ''
+            // this.item.customerRefer = ''
 
             // Popup Mensagem de Dados Salvos
             this.$q.notify({
@@ -306,6 +325,12 @@ export default {
                 textColor: 'white',
                 icon: 'cloud_done'
             })
+            console.log('Ficha: ', this.fichaDisable, ' - Salvar: ', this.salvarDisable);
+            this.fichaDisable=false;
+            this.fichaColor="primary"
+            this.salvarDisable=true;
+            this.salvarColor="secondary"
+            console.log('Ficha: ', this.fichaDisable, ' - Salvar: ', this.salvarDisable);
              
         }
     }
