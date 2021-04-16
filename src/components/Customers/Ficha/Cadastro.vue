@@ -198,11 +198,12 @@
                         <q-btn
                             size=lg 
                             :disable=fichaDisable
-                            :color=fichaColor 
-                            @click="$emit('fichaAnamnese')" 
+                            :color=fichaColor                            
+                            @click="$emit('fichaAnamnese',item)" 
                             label="Ficha de Anamnese"
                             class   ="full-width q-mt-md"
                         />
+                            <!-- @click="$emit('fichaAnamnese')"  -->
                     </div>
                 </div> 
             </q-form>
@@ -234,12 +235,16 @@ export default {
             fichaColor: "secondary",
             salvarDisable: false,
             salvarColor: "primary",
+            paciente: '',
+
             options: [
                 'Rua', 'Avenida', 'Rodovia', 'Estrada','Alameda'
             ],
+
             status: [
                 'Solteiro', 'Casado', 'Divorciado', 'Viúvo'
             ],
+            
             sex: [
                 'Masculino', 'Feminino'
             ]
@@ -325,12 +330,11 @@ export default {
                 textColor: 'white',
                 icon: 'cloud_done'
             })
-            console.log('Ficha: ', this.fichaDisable, ' - Salvar: ', this.salvarDisable);
+            // Reset Buttons 
             this.fichaDisable=false;
             this.fichaColor="primary"
             this.salvarDisable=true;
-            this.salvarColor="secondary"
-            console.log('Ficha: ', this.fichaDisable, ' - Salvar: ', this.salvarDisable);
+            this.salvarColor="secondary" 
              
         }
     }

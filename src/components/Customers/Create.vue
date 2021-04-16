@@ -10,7 +10,7 @@
           vertical
           class="text-teal bg-white"
         >
-          <q-tab name="info" icon="note_add" label="Novo Cadastro" />
+          <q-tab class="q-tab-active" name="info" icon="note_add" label="Novo Cadastro" />
           <q-tab name="anamnese" icon="info" label="Ficha de Anamnese" />
           <q-tab name="profile" icon="account_box" label="Perfil do Paciente" />
           <q-tab name="history" icon="history" label="Histórico do Paciente" />
@@ -31,7 +31,12 @@
           <q-tab-panel name="info">
             <Cadastro
                 :values="info"
-                @fichaAnamnese="tab='anamnese'" />            
+                @fichaAnamnese="
+                  (item) => {
+                    tab='anamnese'
+                    $refs.formAnamnese.load(item)
+                  }
+                  "/>            
           </q-tab-panel>
         <!-- Formulário de Perfil do Paciente -->
           <q-tab-panel name="profile">
@@ -39,7 +44,9 @@
           </q-tab-panel>
         <!-- Formulário de Ficha de Anamnese -->
           <q-tab-panel name="anamnese">
-            <Anamnese />
+            <Anamnese
+              ref="formAnamnese" 
+            />
           </q-tab-panel>
         <!-- Formulário de Histórico do Paciente -->
           <q-tab-panel name="history">
@@ -74,7 +81,10 @@
             return {
                 splitterModel: 20,
                 tab: 'info',
-                info: {}                          
+                info: {},
+                paciente: {
+                  nome: ''
+                }                          
             }
         },
         
@@ -88,9 +98,14 @@
     </script>
 
     <style lang="scss">
-        .tx-italic-bold {
+      .tx-italic-bold {
+      font-style: italic;
+      font-weight: bold;
+      color: lightslategrey;
+      }
+      .q-tab-active {      
+        color: rgb(0, 76, 255) !important;
         font-style: italic;
-        font-weight: bold;
-        color: lightslategrey;
-    }
+        font-weight: bold;   
+      }
 </style>
