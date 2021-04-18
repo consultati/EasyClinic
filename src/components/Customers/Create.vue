@@ -10,7 +10,7 @@
           vertical
           class="text-teal bg-white"
         >
-          <q-tab class="q-tab-active" name="info" icon="note_add" label="Novo Cadastro" />
+          <q-tab name="info" icon="note_add" label="Novo Cadastro" />
           <q-tab name="anamnese" icon="info" label="Ficha de Anamnese" />
           <q-tab name="profile" icon="account_box" label="Perfil do Paciente" />
           <q-tab name="history" icon="history" label="Histórico do Paciente" />
@@ -83,7 +83,9 @@
                 tab: 'info',
                 info: {},
                 paciente: {
-                  nome: ''
+                  nome: '',
+                  cpf: '',
+                  ficha: ''
                 }                          
             }
         },

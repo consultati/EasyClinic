@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="text-h5 tx-italic-bold q-mb-md">Cadastro de Clientes</div>
-            <q-form @submit="salvar" class="q-mt-md" ref="myform">
+            <q-form @submit="salvar(paciente)" class="q-mt-md" ref="myform">
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-6">
                         <q-input autofocus lazy-rules
@@ -14,7 +14,8 @@
                     </div>
                     <div class="col-md-2">
                         <q-input lazy-rules
-                            type ="number"
+                            mask="###.###.###-##" 
+                            hint="ex: 011.222.333-00"
                             label ="CPF"
                             class ="q-mt-md"
                             v-model ="item.customerCPF"
@@ -24,6 +25,7 @@
                     <div class="col-md-4">
                         <q-input lazy-rules
                             type ="email"
+                            hint="ex: nome@dominio.com"
                             label ="e-Mail"
                             class ="q-mt-md"
                             v-model ="item.customerEmail"
@@ -128,7 +130,8 @@
                     </div>
                         <div class="col-md-2">
                         <q-input lazy-rules
-                        type="number"
+                        mask="#####-###"
+                        hint="ex: 12345-100"
                         label = "CEP"
                         class  ="q-mt-md"
                         v-model="item.customerCEP"
@@ -140,7 +143,8 @@
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-4">
                         <q-input
-                        type="number"
+                        mask="(##) # #### ####"
+                        hint="ex: (11) 9 1111 2222"                       
                         label = "Tel Residencial"
                         class  ="q-mt-md"
                         v-model="item.customerTelres"
@@ -148,7 +152,8 @@
                     </div>
                     <div class="col-md-4">
                         <q-input
-                        type="number"
+                        mask="(##) # #### ####"
+                        hint="ex: (11) 9 1111 2222"  
                         label = "Tel Comercial"
                         class  ="q-mt-md"
                         v-model="item.customerTelcml"
@@ -156,7 +161,8 @@
                     </div>
                         <div class="col-md-4">
                         <q-input
-                        type="number"
+                        mask="(##) # #### ####"
+                        hint="ex: (11) 9 1111 2222"  
                         label = "Tel Celular"
                         class  ="q-mt-md"
                         v-model="item.customerTelcel"
@@ -186,8 +192,8 @@
                 <div class="row q-col-gutter-sm">
                     <div class="col-md-6">
                         <q-btn
-                            :disable=salvarDisable
-                            :color  =salvarColor
+                            :disable="salvarDisable"
+                            :color  ="salvarColor"
                             type    ="submit"
                             label  ="Salvar"
                             size    ="lg"
@@ -197,13 +203,14 @@
                     <div class="col-md-6">
                         <q-btn
                             size=lg 
-                            :disable=fichaDisable
-                            :color=fichaColor                            
-                            @click="$emit('fichaAnamnese',item)" 
+                            :disable="fichaDisable"
+                            :color="fichaColor"                            
+                            @click="$emit('fichaAnamnese',item)"
                             label="Ficha de Anamnese"
                             class   ="full-width q-mt-md"
                         />
                             <!-- @click="$emit('fichaAnamnese')"  -->
+                            <!-- @click="$emit('fichaAnamnese',item)" -->
                     </div>
                 </div> 
             </q-form>
@@ -235,7 +242,12 @@ export default {
             fichaColor: "secondary",
             salvarDisable: false,
             salvarColor: "primary",
-            paciente: '',
+            phone: null,
+            paciente: {
+                nome: '',
+                cpf: '',
+                ficha: ''
+            },
 
             options: [
                 'Rua', 'Avenida', 'Rodovia', 'Estrada','Alameda'
@@ -254,6 +266,22 @@ export default {
     methods: {
         ...mapActions('customers', ['fbAddData']),
 
+        salvarPaciente(paciente) {
+            let pacientes = localStorage.getItem('pacientesApp');
+
+            if (pacientes) {
+                // Se existe então atualizar dados do paciente no local storage
+                pacientes = JSON.parse(pacientes);
+                // pacientes.push(paciente); Adicionar ao final do array
+            } else {
+                // Se não existe então criar dados do paciente no local storage
+                pacientes = [paciente];
+            }
+
+            // atualizar local sorage independente de novos dados
+            localStorage.setItem('pacientesApp', JSON.stringify(pacientes))
+        },
+
         isValid(key) {
             return val => {
                 if (key == 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
@@ -264,7 +292,7 @@ export default {
             }
         },
         
-        salvar() {
+        salvar(paciente) {
             
             // Define um número de ficha único
             var date = new Date();
@@ -302,6 +330,13 @@ export default {
                 cliStatus: true,
                 cliFicha: fichaID
             })
+            // Persiste dados do paciente atual na localStorage         
+            paciente.nome = this.item.customerName;
+            paciente.cpf = this.item.customerCPF;
+            paciente.ficha = fichaID;
+            // atualizar local sorage independente de novos dados
+            localStorage.setItem('pacientesApp', JSON.stringify(paciente))
+
             // Limpar Dados
             // this.$refs.myform.resetValidation()
             // this.item.customerName = ''

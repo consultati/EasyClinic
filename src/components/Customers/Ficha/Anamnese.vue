@@ -2,53 +2,53 @@
     <div >
       <div class="text-h5 tx-italic-bold q-mb-md">Ficha de Anamnese</div>
 
+        
+
         <q-input
           v-model="searchField"
           @keyup.esc="searchField = ''"          
           outlined=""
           class="col"        
           label="Buscar Dados do Paciente">        
-          <template v-slot:append>
+          <template v-slot:append>            
             <q-icon v-if="searchField !== ''" name="close" @click="searchField = ''" class="cursor-pointer" />
             <q-icon name="search" />            
           </template>        
         </q-input>
 
-        <!-- <div class="separator"></div>  -->
-
         <q-form @submit="salvar" class="q-mt-md" ref="myform">
             <hr>
             <div class="row q-col-gutter-sm">
                 <div class="col-md-4">
-                    <q-input 
-                        v-model="text" 
-                        :dense="dense" 
-                        readonly                         
-                        :label="nome"
+                    <q-input                        
+                        v-model="this.paciente.nome"
+                        dense="dense" 
+                        disable                         
+                        filled
                         hint="Nome"                  
                     />
                 </div>
                 <div class="col-md-4">
                     <q-input 
-                        v-model="text" 
-                        :dense="dense" 
-                        readonly                         
-                        :label="cpf" 
+                        v-model="this.paciente.cpf" 
+                        dense="dense" 
+                        disable                         
+                        filled
                         hint="CPF" 
                     />                   
                 </div>
                 <div class="col-md-4">
                     <q-input 
-                        v-model="text" 
-                        :dense="dense" 
-                        readonly                         
-                        :label="ficha" 
-                        hint="Ficha" 
+                        v-model="this.paciente.ficha" 
+                        dense="dense" 
+                        disable                         
+                        filled 
+                        hint="Ficha ID" 
                     />                   
                 </div>
             </div>
             <hr>
-            <div class="row">
+            <div class="row q-col-gutter-sm">
                 <div 
                     class="col-md-4" 
                     v-for="(item, index) in questions" 
@@ -88,11 +88,13 @@ import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
 export default {
     data () {
         return {
-        escolha: 'nao',
-        searchField: '',
-        nome: 'Eanes Azurara',  
-        cpf: '021.883.318-00',
-        ficha: '20210208181000'   
+            escolha: 'nao',
+            searchField: '',
+            paciente: {
+                nome: '',
+                cpf: '',
+                ficha: ''
+            },   
         }
     },
 
@@ -100,10 +102,11 @@ export default {
     // Ler Cadastro de Questões
     created() {
         this.getQuestions();  
+        this.receberPaciente(this.paciente)
     },
 
     beforeDestroy() {
-        this.reset()
+        this.reset();
     },
 
     computed: {
@@ -136,7 +139,23 @@ export default {
                 icon: 'cloud_done'
             })
              
-        }
+        },
+
+        receberPaciente(paciente) {
+            let pacientes = localStorage.getItem('pacientesApp');
+
+            if (pacientes) {
+                // Se existe então receber dados do paciente no local storage
+                this.paciente = JSON.parse(pacientes);
+                console.log(this.paciente);
+            } else {
+                // Se não existe então criar dados do paciente no local storage
+                console.log("Local Storage Vazia");
+            }
+
+            // atualizar local sorage independente de novos dados
+            // localStorage.setItem('pacientesApp', JSON.stringify(pacientes))
+        },
     }
     
 }
